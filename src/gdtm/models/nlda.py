@@ -110,7 +110,7 @@ class NLDA:
             topic = self.lda_topics[i]
             final_topic = []
             j = 0
-            while len(final_topic) < self.top_words and j < len(topic):
+            while len(topic) > j and len(final_topic) < self.top_words and j < self.nlda_topic_depth:
                 w = topic[j]
                 token_id = self.dictionary.token2id[w]
                 beta = 2

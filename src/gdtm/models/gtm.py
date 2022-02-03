@@ -136,7 +136,7 @@ class GTM:
             topic = self.gtm_topics[i]
             final_topic = []
             j = 0
-            while len(final_topic) < self.top_words and j < len(topic):
+            while len(final_topic) < self.top_words and j < len(topic) and j < self.topic_depth:
                 w = topic[j]
                 token_id = self.dictionary.token2id[w]
                 beta = 2

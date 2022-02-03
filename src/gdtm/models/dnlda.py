@@ -92,7 +92,7 @@ class dNLDA:
             topic = lda_topics[i]
             final_topic = []
             j = 0
-            while len(final_topic) < self.top_words and j < depth:
+            while len(topic) > j and len(final_topic) < self.top_words and j < depth:
                 w = topic[j]
                 token_id = self.dictionary.token2id[w]
                 beta = 2
@@ -226,5 +226,3 @@ class dNLDA:
 
     def __str__(self):
         return 'dNLDA'
-
-
