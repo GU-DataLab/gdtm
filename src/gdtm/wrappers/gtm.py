@@ -76,7 +76,7 @@ class GTMMallet(utils.SaveLoad, basemodel.BaseTopicModel):
 
     """
     def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4, prefix=None,
-                 optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0, noise_words_max=100, skew=0,
+                 optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
                  seed_topics_file=None, sampling_scheme=2, over_sampling_factor=1, seed_gpu_weights=None):
         """
 
@@ -136,8 +136,6 @@ class GTMMallet(utils.SaveLoad, basemodel.BaseTopicModel):
         self.optimize_interval = optimize_interval
         self.iterations = iterations
         self.random_seed = random_seed
-        self.noise_words_max = noise_words_max
-        self.skew = skew
         self.seed_topics_file = seed_topics_file
         self.sampling_scheme = sampling_scheme
         self.over_sampling_factor = over_sampling_factor
