@@ -28,6 +28,15 @@ class MissingSeedsError(Exception):
         super().__init__(self.message)
 
 
+class MissingSeedWeightsError(Exception):
+    def __init__(self, message=None):
+        self.message = message
+        if self.message is None:
+            self.message = 'You must provide a seed word weighting map.  ' \
+                           'You can do this easily using: helpers.weighting.compute_idf_weights'
+        super().__init__(self.message)
+
+
 class MissingEmbeddingPathError(Exception):
     def __init__(self, message=None):
         self.message = message

@@ -60,6 +60,8 @@ from gensim.models import basemodel
 from gensim.models.ldamodel import LdaModel
 from gensim.utils import check_output, revdict
 
+from ..helpers.exceptions import MissingSeedWeightsError
+
 logger = logging.getLogger(__name__)
 
 
@@ -140,6 +142,8 @@ class GTMMallet(utils.SaveLoad, basemodel.BaseTopicModel):
         self.sampling_scheme = sampling_scheme
         self.over_sampling_factor = over_sampling_factor
         self.seed_gpu_weights = seed_gpu_weights
+        if self.seed_gpu_weights is None:
+            raise MissingSeedWeightsError
         self.save_seed_gpu_weights()
         if corpus is not None:
             self.train(corpus)
@@ -244,7 +248,6 @@ class GTMMallet(utils.SaveLoad, basemodel.BaseTopicModel):
 
         """
         return self.prefix + 'seedgpuweights.txt'
-
 
     def save_seed_gpu_weights(self):
         with open(self.fseedgpuweights(), 'w') as f:

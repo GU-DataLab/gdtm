@@ -4,6 +4,7 @@ import random
 from gensim import corpora
 from ..helpers.exceptions import MissingModelError, MissingDataSetError, MissingSeedsError
 from ..helpers.common import load_flat_dataset
+from ..helpers.weighting import compute_idf_weights
 from ..wrappers import GTMMallet, TNDMallet
 
 
@@ -59,7 +60,7 @@ class GTM:
 
         if self.seed_gpu_weights is None and self.dataset is not None:
             seed_topic_words = load_flat_dataset(seed_topics_file, delimiter=',')
-            self.seed_gpu_weights = self.compute_idf_weights(dataset, seed_topic_words)
+            self.seed_gpu_weights = compute_idf_weights(dataset, seed_topic_words)
         elif self.seed_gpu_weights is None:
             raise MissingDataSetError('You must input either a data set to compute seed gpu weights, or precomputed seed gpu weights.')
 
@@ -83,17 +84,6 @@ class GTM:
         corpus = [dictionary.doc2bow(doc) for doc in self.dataset]
         self.dictionary = dictionary
         self.corpus = corpus
-
-    def compute_idf_weights(self, dataset, topics):
-        weights = []
-        num = len(dataset)
-        for topic in topics:
-            weight_list = []
-            for w in topic:
-                df = 1 + sum([1 for d in dataset if w in d])
-                weight_list.append(num / df)
-            weights.append(weight_list)
-        return weights
 
     def compute_tnd(self):
         """
