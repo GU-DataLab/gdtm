@@ -14,7 +14,7 @@ class deTND(dTND):
 
     def __init__(self, dataset=None, k=30, alpha=50, beta0=0.01, beta1=25, noise_words_max=200,
                  iterations=1000, top_words=20, tw_dist=None, corpus=None, dictionary=None,
-                 save_path=None, mallet_tnd_path=None, starting_alpha_array_file=None, embeddings_path=None,
+                 save_path=None, mallet_tnd_path=None, starting_alpha_array_file=None, embedding_path=None,
                  closest_x_words=3,
                  random_seed=1824, run=True,
                  workers=4):
@@ -49,8 +49,7 @@ class deTND(dTND):
         else:
             save = False
             self.save_path = 'detnd_results/'
-        self.embeddings_path = embeddings_path
-        # self.embeddings_dict = load_facebook_vectors(self.embeddings_path)
+        self.embedding_path = embedding_path
         self.closest_x_words = closest_x_words
 
         if run:
@@ -62,17 +61,17 @@ class deTND(dTND):
         self.prepare_data(t)
         # run model
         if self.last_alpha_array_file is not None:
-            model = deTNDMallet(self.mallet_tnd_path, corpus=self.corpus, num_topics=self.k, beta=self.last_beta,
+            model = deTNDMallet(self.mallet_path, corpus=self.corpus, num_topics=self.k, beta=self.last_beta,
                                 id2word=self.dictionary, iterations=self.iterations, skew=self.beta1,
                                 noise_words_max=self.noise_words_max, workers=self.workers,
                                 noise_dist_file=self.last_noise_dist_file, tw_dist_file=self.last_tw_dist_file,
-                                alpha_array_infile=self.last_alpha_array_file, embeddings_path=self.embeddings_path,
+                                alpha_array_infile=self.last_alpha_array_file, embedding_path=self.embedding_path,
                                 closest_x_words=self.closest_x_words)
         else:
-            model = deTNDMallet(self.mallet_tnd_path, corpus=self.corpus, num_topics=self.k, beta=self.last_beta,
+            model = deTNDMallet(self.mallet_path, corpus=self.corpus, num_topics=self.k, beta=self.last_beta,
                                 id2word=self.dictionary, iterations=self.iterations, skew=self.beta1,
                                 noise_words_max=self.noise_words_max, workers=self.workers,
-                                alpha=self.alpha, embeddings_path=self.embeddings_path,
+                                alpha=self.alpha, embedding_path=self.embedding_path,
                                 closest_x_words=self.closest_x_words)
         # get/set new beta and alpha array files, noise dist file
         self.last_beta = model.load_beta()

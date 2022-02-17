@@ -2,48 +2,38 @@
 import math
 import random
 from gensim import corpora
-from ..helpers.exceptions import MissingModelError, MissingDataSetError
+from ..helpers.exceptions import MissingDataSetError
 from ..wrappers import dLDAMallet, dTNDMallet
 from ..helpers.common import save_topics, save_noise_dist
+from .nlda import NLDA
 
 
-class dNLDA:
+class dNLDA(NLDA):
     topics = []
 
-    def __init__(self, dataset=None, k=30, tnd_alpha=50, tnd_beta0=0.01, tnd_beta1=25, tnd_noise_words_max=200,
-                 tnd_iterations=1000, lda_iterations=1000, lda_alpha=50, lda_beta=0.01, nlda_phi=10, nlda_topic_depth=100, top_words=20,
-                 nlda_phi_list=None, nlda_topic_depth_list=None, num_time_periods=10,
-                 tnd_noise_distribution=[], lda_tw_dist=[], lda_topics=[], corpus=None, dictionary=None,
-                 last_tnd_alpha_array_file=None, last_tnd_noise_dist_file=None,
-                 last_tnd_tw_dist_file=None, last_lda_alpha_array_file=None, last_lda_tw_dist_file=None, lda_save_path=None,
-                 save_path=None, mallet_tnd_path=None, mallet_lda_path=None, random_seed=1824, workers=4, run=True):
-        self.dataset = dataset
-        self.k = k
-        self.tnd_alpha = tnd_alpha
-        self.tnd_beta1 = tnd_beta1
-        self.tnd_noise_words_max = tnd_noise_words_max
-        self.tnd_iterations = tnd_iterations
-        self.lda_iterations = lda_iterations
-        self.lda_alpha = lda_alpha
-        self.nlda_phi = nlda_phi
-        self.nlda_topic_depth = nlda_topic_depth
-        self.nlda_phi_list = nlda_phi_list
-        self.nlda_topic_depth_list = nlda_topic_depth_list
-        self.top_words = top_words
-        self.tnd_noise_distribution = tnd_noise_distribution
-        self.lda_tw_dist = lda_tw_dist
-        self.lda_topics = lda_topics
-        self.corpus = corpus
-        self.dictionary = dictionary
-        self.lda_save_path = lda_save_path
+    def __init__(self, dataset=None, tnd_k=30, tnd_alpha=50, tnd_beta0=0.01, tnd_beta1=25, tnd_noise_words_max=200,
+                 tnd_iterations=1000, lda_iterations=1000, lda_k=30, lda_beta=0.01, nlda_phi=10,
+                 nlda_topic_depth=100, top_words=20, nlda_phi_list=None, nlda_topic_depth_list=None,
+                 num_time_periods=10, tnd_noise_distribution=[], lda_tw_dist=[], lda_topics=[], corpus=None,
+                 dictionary=None, last_tnd_alpha_array_file=None, last_tnd_noise_dist_file=None,
+                 last_tnd_tw_dist_file=None, last_lda_alpha_array_file=None, last_lda_tw_dist_file=None,
+                 lda_save_path=None, save_path=None, mallet_tnd_path=None, mallet_lda_path=None, random_seed=1824,
+                 tnd_workers=4, lda_workers=4, run=True):
+
+        super().__init__(dataset=dataset, tnd_k=tnd_k, tnd_alpha=tnd_alpha, tnd_beta0=tnd_beta0, tnd_beta1=tnd_beta1,
+                         tnd_noise_words_max=tnd_noise_words_max, tnd_iterations=tnd_iterations,
+                         lda_iterations=lda_iterations, lda_k=lda_k, nlda_phi=nlda_phi,
+                         nlda_topic_depth=nlda_topic_depth, top_words=top_words,
+                         tnd_noise_distribution=tnd_noise_distribution, lda_tw_dist=lda_tw_dist, lda_topics=lda_topics,
+                         corpus=corpus, dictionary=dictionary, save_path=save_path, mallet_tnd_path=mallet_tnd_path,
+                         mallet_lda_path=mallet_lda_path, random_seed=random_seed, run=False, tnd_workers=tnd_workers,
+                         lda_workers=lda_workers)
         if save_path is not None:
             save = True
             self.save_path = save_path
         else:
             save = False
-            self.save_path = 'nlda_results/'
-        self.mallet_tnd_path = mallet_tnd_path
-        self.mallet_lda_path = mallet_lda_path
+            self.save_path = 'dnlda_results/'
         self.last_lda_beta = lda_beta
         self.last_lda_alpha_array_file = last_lda_alpha_array_file
         self.last_lda_tw_dist_file = last_lda_tw_dist_file
@@ -51,17 +41,13 @@ class dNLDA:
         self.last_tnd_alpha_array_file = last_tnd_alpha_array_file
         self.last_tnd_tw_dist_file = last_tnd_tw_dist_file
         self.last_tnd_noise_dist_file = last_tnd_noise_dist_file
-        self.workers = workers
-        self.random_seed = random_seed
-        random.seed(self.random_seed)
+        self.lda_save_path = lda_save_path
+        self.nlda_phi_list = nlda_phi_list
+        self.nlda_topic_depth_list = nlda_topic_depth_list
 
         self.num_time_periods = num_time_periods
-        if dataset is not None:
+        if self.dataset is not None:
             self.num_time_periods = len(dataset)
-        if self.mallet_tnd_path is None and len(self.tnd_noise_distribution) != self.num_time_periods:
-            raise MissingModelError('tnd')
-        if self.mallet_lda_path is None and len(self.lda_tw_dist) != self.num_time_periods:
-            raise MissingModelError('lda')
         if self.dataset is None and (self.corpus is None or self.dictionary is None
                                      or len(self.tnd_noise_distribution) != self.num_time_periods or
                                      len(self.lda_tw_dist) != self.num_time_periods):
@@ -110,43 +96,7 @@ class dNLDA:
             topics.append(final_topic)
         return topics
 
-
-    def run_nlda_one_time_period(self, t):
-        self.prepare_data(t)
-        if len(self.tnd_noise_distribution) > t:
-            noise_dist = self.tnd_noise_distribution[t]
-        else:
-            tnd_model = dTNDMallet(self.mallet_tnd_path, corpus=self.corpus, num_topics=self.k, beta=self.last_tnd_beta,
-                                   id2word=self.dictionary, iterations=self.tnd_iterations, skew=self.tnd_beta1,
-                                   noise_words_max=self.tnd_noise_words_max, workers=self.workers,
-                                   noise_dist_file=self.last_tnd_noise_dist_file, tw_dist_file=self.last_tnd_tw_dist_file,
-                                   alpha_array_infile=self.last_tnd_alpha_array_file, alpha=self.tnd_alpha)
-            noise_dist = tnd_model.load_noise_dist()
-            self.tnd_noise_distribution.append(noise_dist)
-            self.last_tnd_beta = tnd_model.load_beta()
-            self.last_tnd_alpha_array_file = tnd_model.falphaarrayfile()
-            self.last_tnd_noise_dist_file = tnd_model.fnoisefile()
-            self.last_tnd_tw_dist_file = tnd_model.fwordweights()
-
-        if len(self.lda_tw_dist) > t and len(self.lda_topics) > t:
-            tw_dist = self.lda_tw_dist[t]
-            lda_topics = self.lda_topics[t]
-        else:
-            lda_model = dLDAMallet(self.mallet_lda_path, self.corpus, num_topics=self.k, id2word=self.dictionary,
-                               workers=4, tw_dist_file=self.last_lda_tw_dist_file,
-                               alpha_array_infile=self.last_lda_alpha_array_file, beta=self.last_lda_beta,
-                               iterations=self.lda_iterations, random_seed=self.random_seed)
-            tw_dist = lda_model.load_word_topics()
-            self.lda_tw_dist.append(tw_dist)
-            topic_tuples = lda_model.show_topics(num_topics=self.k, num_words=self.nlda_topic_depth, formatted=False)
-            lda_topics = [[w for (w, _) in topic[1]] for topic in topic_tuples]
-            if self.lda_save_path:
-                save_topics(lda_topics, self.lda_save_path + 'topics_{}_{}.csv'.format(self.k, t))
-            self.lda_topics.append(lda_topics)
-            self.last_lda_beta = lda_model.load_beta()
-            self.last_lda_alpha_array_file = lda_model.falphaarrayfile()
-            self.last_lda_tw_dist_file = lda_model.fwordweights()
-
+    def test_all_phi_and_depths(self, tw_dist, noise_dist, lda_topics):
         phi = self.nlda_phi
         depth = self.nlda_topic_depth
         phi_depth_combos = []
@@ -172,7 +122,47 @@ class dNLDA:
             topics = self.compute_nlda(noise_dist=noise_dist, tw_dist=tw_dist, lda_topics=lda_topics, phi=phi,
                                        depth=depth)
             topic_sets.append((phi, depth, topics))
+        return topic_sets
 
+    def run_nlda_one_time_period(self, t):
+        self.prepare_data(t)
+        if len(self.tnd_noise_distribution) > t:
+            noise_dist = self.tnd_noise_distribution[t]
+        else:
+            tnd_model = dTNDMallet(self.mallet_tnd_path, corpus=self.corpus, num_topics=self.tnd_k,
+                                   beta=self.last_tnd_beta, id2word=self.dictionary, iterations=self.tnd_iterations,
+                                   skew=self.tnd_beta1, noise_words_max=self.tnd_noise_words_max,
+                                   workers=self.tnd_workers, noise_dist_file=self.last_tnd_noise_dist_file,
+                                   tw_dist_file=self.last_tnd_tw_dist_file,
+                                   alpha_array_infile=self.last_tnd_alpha_array_file, alpha=self.tnd_alpha)
+            noise_dist = tnd_model.load_noise_dist()
+            self.tnd_noise_distribution.append(noise_dist)
+            self.last_tnd_beta = tnd_model.load_beta()
+            self.last_tnd_alpha_array_file = tnd_model.falphaarrayfile()
+            self.last_tnd_noise_dist_file = tnd_model.fnoisefile()
+            self.last_tnd_tw_dist_file = tnd_model.fwordweights()
+
+        if len(self.lda_tw_dist) > t and len(self.lda_topics) > t:
+            tw_dist = self.lda_tw_dist[t]
+            lda_topics = self.lda_topics[t]
+        else:
+            lda_model = dLDAMallet(self.mallet_lda_path, self.corpus, num_topics=self.lda_k, id2word=self.dictionary,
+                               workers=4, tw_dist_file=self.last_lda_tw_dist_file,
+                               alpha_array_infile=self.last_lda_alpha_array_file, beta=self.last_lda_beta,
+                               iterations=self.lda_iterations, random_seed=self.random_seed)
+            tw_dist = lda_model.load_word_topics()
+            self.lda_tw_dist.append(tw_dist)
+            topic_tuples = lda_model.show_topics(num_topics=self.lda_k, num_words=self.nlda_topic_depth,
+                                                 formatted=False)
+            lda_topics = [[w for (w, _) in topic[1]] for topic in topic_tuples]
+            if self.lda_save_path:
+                save_topics(lda_topics, self.lda_save_path + 'topics_{}_{}.csv'.format(self.lda_k, t))
+            self.lda_topics.append(lda_topics)
+            self.last_lda_beta = lda_model.load_beta()
+            self.last_lda_alpha_array_file = lda_model.falphaarrayfile()
+            self.last_lda_tw_dist_file = lda_model.fwordweights()
+
+        topic_sets = self.test_all_phi_and_depths(tw_dist, noise_dist, lda_topics)
         return topic_sets, noise_dist
 
 

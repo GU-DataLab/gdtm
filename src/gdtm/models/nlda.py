@@ -92,8 +92,7 @@ class NLDA:
         :return: void
         """
         model = LDAMallet(self.mallet_lda_path, self.corpus, num_topics=self.lda_k, id2word=self.dictionary,
-                          workers=self.lda_workers,
-                          iterations=self.lda_iterations, random_seed=self.random_seed)
+                          workers=self.lda_workers, iterations=self.lda_iterations, random_seed=self.random_seed)
         topic_word_distribution = model.load_word_topics()
         self.lda_tw_dist = topic_word_distribution
         topics = model.show_topics(num_topics=self.lda_k, num_words=self.nlda_topic_depth, formatted=False)

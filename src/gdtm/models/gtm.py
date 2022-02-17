@@ -36,7 +36,7 @@ class GTM:
         if save_path is not None:
             self.save_path = save_path
         else:
-            self.save_path = 'results/'
+            self.save_path = 'gtm_results/'
         self.mallet_tnd_path = mallet_tnd_path
         self.mallet_gtm_path = mallet_gtm_path
         self.random_seed = random_seed
