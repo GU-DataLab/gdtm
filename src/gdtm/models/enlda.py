@@ -3,7 +3,7 @@ import math
 import random
 from gensim import corpora
 from ..helpers.exceptions import MissingModelError, MissingDataSetError, MissingEmbeddingPathError
-from ..wrappers import LDAMallet, eTNDMallet
+from ..wrappers import eTNDMallet
 from .nlda import NLDA
 
 

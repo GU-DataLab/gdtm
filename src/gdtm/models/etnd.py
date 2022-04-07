@@ -1,5 +1,4 @@
 #!/home/rob/.env/topics/bin/python
-from gensim import corpora
 from ..helpers.exceptions import MissingEmbeddingPathError
 from ..wrappers import eTNDMallet
 from .tnd import TND

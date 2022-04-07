@@ -22,20 +22,7 @@ which needs only :math:`O(1)` memory.
 
 
 import logging
-import os
-import random
-import warnings
-import tempfile
-import xml.etree.ElementTree as et
-import zipfile
-from itertools import chain
-
-import numpy
-
-from gensim import utils, matutils
-from gensim.models import basemodel
-from gensim.models.ldamodel import LdaModel
-from gensim.utils import check_output, revdict
+from gensim.utils import check_output
 
 from .tnd import TNDMallet, eTNDMallet
 

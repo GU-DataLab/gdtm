@@ -35,7 +35,6 @@ Use `official guide <http://mallet.cs.umass.edu/download.php>`_ or this one ::
 
 import logging
 from gensim.utils import check_output
-
 from .base_wrapper import BaseMalletWrapper
 
 logger = logging.getLogger(__name__)

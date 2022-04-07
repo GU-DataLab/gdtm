@@ -25,7 +25,6 @@ The wrapped model can NOT be updated with new documents for online training -- u
 
 import logging
 import os
-
 from gensim.utils import check_output
 from gensim.models.fasttext import load_facebook_vectors
 from .base_wrapper import BaseMalletWrapper

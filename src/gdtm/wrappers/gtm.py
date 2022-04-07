@@ -23,7 +23,6 @@ which needs only :math:`O(1)` memory.
 
 import logging
 from gensim.utils import check_output
-
 from ..helpers.exceptions import MissingSeedWeightsError
 from .base_wrapper import BaseMalletWrapper
 

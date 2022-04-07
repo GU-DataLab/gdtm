@@ -1,5 +1,4 @@
 #!/home/rob/.env/topics/bin/python
-from gensim.models.fasttext import load_facebook_vectors
 from ..helpers.common import save_topics, save_noise_dist
 from ..wrappers import deTNDMallet
 from .dtnd import dTND

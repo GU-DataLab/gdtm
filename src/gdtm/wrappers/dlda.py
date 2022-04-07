@@ -45,13 +45,7 @@ Examples
 
 
 import logging
-import os
-import random
-import tempfile
-
-from gensim import utils
 from gensim.utils import check_output
-
 from .base_wrapper import BaseMalletWrapper
 
 logger = logging.getLogger(__name__)

@@ -1,5 +1,4 @@
 #!/home/rob/.env/topics/bin/python
-import math
 import random
 from gensim import corpora
 from ..helpers.exceptions import MissingModelError, MissingDataSetError
