@@ -5,20 +5,12 @@
 # Licensed under the GNU LGPL v2.1 - http://www.gnu.org/licenses/lgpl.html
 # Refactored to run TND and save noise distribution by Rob Churchill (Feb 2021)
 
-r"""Python wrapper for `Topic Noise Discriminator (TND)`_
-adapted from `MALLET, the Java topic modelling toolkit <http://mallet.cs.umass.edu/>`_
+r"""Python wrapper for `Topic Noise Discriminator (TND)`
+adapted from `MALLET, the Java topic modelling toolkit <http://mallet.cs.umass.edu/>`
+TND source code can be found here: <https://github.com/GU-DataLab/topic-noise-models-source>
 
 This module allows both TND model estimation from a training corpus and inference of topic distribution on new,
 unseen documents, using an (optimized version of) collapsed gibbs sampling from MALLET.
-
-Notes
------
-MALLET's LDA training requires :math:`O(corpus\_words)` of memory, keeping the entire corpus in RAM.
-If you find yourself running out of memory, either decrease the `workers` constructor parameter,
-or use :class:`gensim.models.ldamodel.LdaModel` or :class:`gensim.models.ldamulticore.LdaMulticore`
-which needs only :math:`O(1)` memory.
-The wrapped model can NOT be updated with new documents for online training -- use
-:class:`~gensim.models.ldamodel.LdaModel` or :class:`~gensim.models.ldamulticore.LdaMulticore` for that.
 
 """
 
@@ -33,20 +25,21 @@ logger = logging.getLogger(__name__)
 
 
 class TNDMallet(BaseMalletWrapper):
-    """Python wrapper for TND using `MALLET <http://mallet.cs.umass.edu/>`_.
+    """Python wrapper for TND using `MALLET <http://mallet.cs.umass.edu/>`.
+    TND's source code can be found here: <https://github.com/GU-DataLab/topic-noise-models-source>.
 
     Communication between MALLET and Python takes place by passing around data files on disk
     and calling Java with subprocess.call().
 
     Warnings
     --------
-    This is **only** python wrapper for `MALLET TND`_,
+    This is **only** python wrapper for `MALLET TND`,
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
     """
-    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4, prefix=None,
-                 optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0, noise_words_max=100, skew=0,
-                 is_parent=False):
+    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
+                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
+                 noise_words_max=100, skew=0, is_parent=False):
         """
 
         Parameters
@@ -74,7 +67,12 @@ class TNDMallet(BaseMalletWrapper):
             Threshold of the probability above which we consider a topic.
         random_seed: int, optional
             Random seed to ensure consistent results, if 0 - use system clock.
-
+        noise_words_max: int, optional
+            Number of noise words to save when saving the distribution to a file.
+            The top `noise_words_max` most probable noise words will be saved.
+        skew: int, optional
+            Akin to the gamma parameter in the paper, increasing `skew` increases the probability of each word being
+            assigned to a topic over noise
         """
         super().__init__(mallet_path, corpus=corpus, num_topics=num_topics, alpha=alpha, beta=beta, id2word=id2word,
                          workers=workers, prefix=prefix, optimize_interval=optimize_interval, iterations=iterations,
@@ -136,8 +134,8 @@ class TNDMallet(BaseMalletWrapper):
         return noise_dist
 
 
-r"""Python wrapper for `embedded TND `_
-from `MALLET, the Java topic modelling toolkit <http://mallet.cs.umass.edu/>`_
+r"""Python wrapper for `embedded TND `
+from `MALLET, the Java topic modelling toolkit <http://mallet.cs.umass.edu/>`
 
 This module allows both eTND model estimation from a training corpus and inference of topic distribution on new,
 unseen documents, using an (optimized version of) collapsed gibbs sampling from MALLET.
@@ -153,7 +151,7 @@ The wrapped model can NOT be updated with new documents for online training -- u
 
 Installation
 ------------
-Use `official guide <http://mallet.cs.umass.edu/download.php>`_ or this one ::
+Use `official guide <http://mallet.cs.umass.edu/download.php>` or this one ::
 
     sudo apt-get install default-jdk
     sudo apt-get install ant
@@ -176,20 +174,20 @@ Examples
 
 
 class eTNDMallet(TNDMallet):
-    """Python wrapper for eTND using `MALLET <http://mallet.cs.umass.edu/>`_.
+    """Python wrapper for eTND using `MALLET <http://mallet.cs.umass.edu/>`.
 
     Communication between MALLET and Python takes place by passing around data files on disk
     and calling Java with subprocess.call().
 
     Warnings
     --------
-    This is **only** python wrapper for `MALLET LDA <http://mallet.cs.umass.edu/>`_,
+    This is **only** python wrapper for `MALLET LDA <http://mallet.cs.umass.edu/>`,
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
     """
     def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4, prefix=None,
                  optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0, noise_words_max=100, skew=0,
-                 tau=200, embedding_path=None, closest_x_words=3, save_embedding_comp=True, is_parent=False):
+                 tau=200, embedding_path=None, closest_x_words=3, is_parent=False):
         """
 
         Parameters
@@ -217,7 +215,20 @@ class eTNDMallet(TNDMallet):
             Threshold of the probability above which we consider a topic.
         random_seed: int, optional
             Random seed to ensure consistent results, if 0 - use system clock.
-
+        noise_words_max: int, optional
+            Number of noise words to save when saving the distribution to a file.
+            The top `noise_words_max` most probable noise words will be saved.
+        skew: int, optional
+            Akin to the gamma parameter in the paper, increasing `skew` increases the probability of each word being
+            assigned to a topic over noise
+        tau: int, optional
+            burn-in period for embedding sampling. The number of iterations to wait before performing embedding sampling
+            on words assigned to noise.
+        embedding_path: str, optional
+            Path to word embeddings file.  Required if using word embedding sampling.
+        closest_x_words: int, optional
+            The number of words to sample from the embedding space for an assigned noise word. Increasing this value
+            leads to more words being added to the noise distribution.
         """
         super().__init__(mallet_path, corpus=corpus, num_topics=num_topics, alpha=alpha, beta=beta, id2word=id2word,
                          workers=workers, prefix=prefix, optimize_interval=optimize_interval, iterations=iterations,
@@ -226,7 +237,6 @@ class eTNDMallet(TNDMallet):
         self.tau = tau
         self.embedding_path = embedding_path
         self.closest_x_words = closest_x_words
-        self.save_embedding_comp = save_embedding_comp
         if corpus is not None and not is_parent:
             self.train(corpus)
 
@@ -252,10 +262,6 @@ class eTNDMallet(TNDMallet):
         with open(self.fclosewords(), 'w') as f:
             for w in hasht.keys():
                 f.write('{},{}\n'.format(w, ','.join(hasht[w])))
-        # if self.save_embedding_comp:
-        #     with open('data/cw_{}_{}.txt'.format(self.embedding_path.replace('.bin', ''), self.closest_x_words, 'w')) as f:
-        #         for w in hasht.keys():
-        #             f.write('{},{}\n'.format(w, ','.join(hasht[w])))
 
     def train(self, corpus):
         """Train Mallet LDA.

@@ -52,7 +52,8 @@ logger = logging.getLogger(__name__)
 
 
 class dLDAMallet(BaseMalletWrapper):
-    """Python wrapper for LDA using `MALLET <http://mallet.cs.umass.edu/>`_.
+    """Python wrapper for dynamic LDA using `MALLET <http://mallet.cs.umass.edu/>`_.
+    D-LDA source code can be found here: <https://github.com/GU-DataLab/topic-noise-models-source>
 
     Communication between MALLET and Python takes place by passing around data files on disk
     and calling Java with subprocess.call().
@@ -63,8 +64,8 @@ class dLDAMallet(BaseMalletWrapper):
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
     """
-    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4, prefix=None,
-                 optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
+    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
+                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
                  alpha_array_infile=None, tw_dist_file=None):
         """
 
@@ -93,6 +94,10 @@ class dLDAMallet(BaseMalletWrapper):
             Threshold of the probability above which we consider a topic.
         random_seed: int, optional
             Random seed to ensure consistent results, if 0 - use system clock.
+        alpha_array_infile: str, optional
+            path to file containing alpha distribution from previous time period
+        tw_dist_file: str, optional
+            path to file containing topic-word distribution from previous time period
 
         """
         super().__init__(mallet_path, corpus=corpus, num_topics=num_topics, alpha=alpha, beta=beta, id2word=id2word,

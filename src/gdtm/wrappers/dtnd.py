@@ -5,18 +5,12 @@
 # Licensed under the GNU LGPL v2.1 - http://www.gnu.org/licenses/lgpl.html
 # Edited to run dynamic TND and save noise distribution by Rob Churchill (Feb 2021)
 
-r"""Python wrapper for `Latent Dirichlet Allocation (LDA) <https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation>`_
-from `MALLET, the Java topic modelling toolkit <http://mallet.cs.umass.edu/>`_
+r"""Python wrapper for `Dynamic Topic Noise Discriminator (D-TND)`_
+adapted from `MALLET, the Java topic modelling toolkit <http://mallet.cs.umass.edu/>`_
+D-TND source code can be found here: <https://github.com/GU-DataLab/topic-noise-models-source>
 
-This module allows both LDA model estimation from a training corpus and inference of topic distribution on new,
+This module allows both D-TND model estimation from a training corpus and inference of topic distribution on new,
 unseen documents, using an (optimized version of) collapsed gibbs sampling from MALLET.
-
-Notes
------
-MALLET's LDA training requires :math:`O(corpus\_words)` of memory, keeping the entire corpus in RAM.
-If you find yourself running out of memory, either decrease the `workers` constructor parameter,
-or use :class:`gensim.models.ldamodel.LdaModel` or :class:`gensim.models.ldamulticore.LdaMulticore`
-which needs only :math:`O(1)` memory.
 
 """
 
@@ -41,9 +35,9 @@ class dTNDMallet(TNDMallet):
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
     """
-    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4, prefix=None,
-                 optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0, noise_words_max=100, skew=0,
-                 alpha_array_infile=None, tw_dist_file=None, noise_dist_file=None):
+    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
+                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
+                 noise_words_max=100, skew=0, alpha_array_infile=None, tw_dist_file=None, noise_dist_file=None):
         """
 
         Parameters
@@ -71,6 +65,18 @@ class dTNDMallet(TNDMallet):
             Threshold of the probability above which we consider a topic.
         random_seed: int, optional
             Random seed to ensure consistent results, if 0 - use system clock.
+        noise_words_max: int, optional
+            Number of noise words to save when saving the distribution to a file.
+            The top `noise_words_max` most probable noise words will be saved.
+        skew: int, optional
+            Akin to the gamma parameter in the paper, increasing `skew` increases the probability of each word being
+            assigned to a topic over noise
+        alpha_array_infile: str, optional
+            path to file containing alpha distribution from previous time period
+        tw_dist_file: str, optional
+            path to file containing topic-word distribution from previous time period
+        noise_dist_file: str, optional
+            path to file containing noise distribution from previous time period
 
         """
         super().__init__(mallet_path, corpus=corpus, num_topics=num_topics, alpha=alpha, beta=beta, id2word=id2word,
@@ -207,9 +213,9 @@ class deTNDMallet(eTNDMallet):
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
     """
-    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4, prefix=None,
-                 optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0, noise_words_max=100, skew=0,
-                 tau=200, embedding_path=None, closest_x_words=3, save_embedding_comp=True,
+    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
+                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
+                 noise_words_max=100, skew=0, tau=200, embedding_path=None, closest_x_words=3,
                  alpha_array_infile=None, tw_dist_file=None, noise_dist_file=None):
         """
 
@@ -238,16 +244,30 @@ class deTNDMallet(eTNDMallet):
             Threshold of the probability above which we consider a topic.
         random_seed: int, optional
             Random seed to ensure consistent results, if 0 - use system clock.
-
+        noise_words_max: int, optional
+            Number of noise words to save when saving the distribution to a file.
+            The top `noise_words_max` most probable noise words will be saved.
+        skew: int, optional
+            Akin to the gamma parameter in the paper, increasing `skew` increases the probability of each word being
+            assigned to a topic over noise
+        alpha_array_infile: str, optional
+            path to file containing alpha distribution from previous time period
+        tw_dist_file: str, optional
+            path to file containing topic-word distribution from previous time period
+        noise_dist_file: str, optional
+            path to file containing noise distribution from previous time period
+        tau: int, optional
+            burn-in period for embedding sampling. The number of iterations to wait before performing embedding sampling
+            on words assigned to noise.
         """
         super().__init__(mallet_path, corpus=corpus, num_topics=num_topics, alpha=alpha, beta=beta, id2word=id2word,
                          workers=workers, prefix=prefix, optimize_interval=optimize_interval, iterations=iterations,
                          topic_threshold=topic_threshold, random_seed=random_seed, noise_words_max=noise_words_max,
-                         skew=skew, embedding_path=embedding_path, closest_x_words=closest_x_words,
-                         save_embedding_comp=save_embedding_comp, is_parent=True)
+                         skew=skew, embedding_path=embedding_path, closest_x_words=closest_x_words, is_parent=True)
         self.alpha_array_infile = alpha_array_infile
         self.tw_dist_file = tw_dist_file
         self.noise_dist_file = noise_dist_file
+        self.tau = tau
         if corpus is not None:
             self.train(corpus)
 
@@ -297,15 +317,15 @@ class deTNDMallet(eTNDMallet):
         self.convert_input(corpus, infer=False)
         cmd = self.mallet_path + ' train-topics --input %s --num-topics %s  --alpha %s --optimize-interval %s '\
             '--num-threads %s --output-state %s --output-doc-topics %s --output-topic-keys %s '\
-            '--num-iterations %s --inferencer-filename %s --doc-topics-threshold %s  --random-seed %s --output-noise %s '\
-            '--noise-words-max %s --skew %s --beta %s --close-words-file %s --tau %s --optimize-burn-in %s ' \
-            '--topic-word-weights-file %s --output-alpha-array %s --output-beta %s '
+            '--num-iterations %s --inferencer-filename %s --doc-topics-threshold %s  --random-seed %s ' \
+            '--output-noise %s --noise-words-max %s --skew %s --beta %s --close-words-file %s --tau %s ' \
+            '--optimize-burn-in %s --topic-word-weights-file %s --output-alpha-array %s --output-beta %s '
 
         cmd = cmd % (
             self.fcorpusmallet(), self.num_topics, self.alpha, self.optimize_interval,
             self.workers, self.fstate(), self.fdoctopics(), self.ftopickeys(), self.iterations,
-            self.finferencer(), self.topic_threshold, str(self.random_seed), self.fnoisefile(), str(self.noise_words_max),
-            str(self.skew), str(self.beta), self.fclosewords(), str(self.tau), str(self.tau),
+            self.finferencer(), self.topic_threshold, str(self.random_seed), self.fnoisefile(),
+            str(self.noise_words_max), str(self.skew), str(self.beta), self.fclosewords(), str(self.tau), str(self.tau),
             self.fwordweights(), self.falphaarrayfile(), self.fbetafile()
         )
         if self.alpha_array_infile is not None:

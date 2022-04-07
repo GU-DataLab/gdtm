@@ -24,19 +24,19 @@ logger = logging.getLogger(__name__)
 
 
 class BaseMalletWrapper(utils.SaveLoad, basemodel.BaseTopicModel):
-    """Python wrapper for TND using `MALLET <http://mallet.cs.umass.edu/>`_.
+    """Abstract Python wrapper for topic models using `MALLET <http://mallet.cs.umass.edu/>`_.
 
     Communication between MALLET and Python takes place by passing around data files on disk
     and calling Java with subprocess.call().
 
     Warnings
     --------
-    This is **only** python wrapper for `MALLET TND`_,
+    This is **only** python wrapper for `MALLET-based models`_,
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
     """
-    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4, prefix=None,
-                 optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0):
+    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
+                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0):
         """
 
         Parameters

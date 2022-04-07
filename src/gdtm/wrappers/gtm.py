@@ -5,18 +5,12 @@
 # Licensed under the GNU LGPL v2.1 - http://www.gnu.org/licenses/lgpl.html
 # Edited to run Guided Topic Model and save noise distribution by Rob Churchill (March 2021)
 
-r"""Python wrapper for `Latent Dirichlet Allocation (LDA) <https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation>`_
-from `MALLET, the Java topic modelling toolkit <http://mallet.cs.umass.edu/>`_
+r"""Python wrapper for `Guided Topic-Noise Model (GTM)`
+adapted from `MALLET, the Java topic modelling toolkit <http://mallet.cs.umass.edu/>`
+GTM source code can be found here: <https://github.com/GU-DataLab/topic-noise-models-source>
 
-This module allows both LDA model estimation from a training corpus and inference of topic distribution on new,
+This module allows both GTM model estimation from a training corpus and inference of topic distribution on new,
 unseen documents, using an (optimized version of) collapsed gibbs sampling from MALLET.
-
-Notes
------
-MALLET's LDA training requires :math:`O(corpus\_words)` of memory, keeping the entire corpus in RAM.
-If you find yourself running out of memory, either decrease the `workers` constructor parameter,
-or use :class:`gensim.models.ldamodel.LdaModel` or :class:`gensim.models.ldamulticore.LdaMulticore`
-which needs only :math:`O(1)` memory.
 
 """
 
@@ -30,14 +24,14 @@ logger = logging.getLogger(__name__)
 
 
 class GTMMallet(BaseMalletWrapper):
-    """Python wrapper for Seeded LDA using `MALLET <http://mallet.cs.umass.edu/>`_.
+    """Python wrapper for GTM using `MALLET <http://mallet.cs.umass.edu/>`.
 
     Communication between MALLET and Python takes place by passing around data files on disk
     and calling Java with subprocess.call().
 
     Warnings
     --------
-    This is **only** python wrapper for `MALLET LDA <http://mallet.cs.umass.edu/>`_,
+    This is **only** python wrapper for `MALLET LDA <http://mallet.cs.umass.edu/>`,
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
     """
@@ -73,7 +67,7 @@ class GTMMallet(BaseMalletWrapper):
             Random seed to ensure consistent results, if 0 - use system clock.
         sampling_scheme: int, optional
             0: normal sampling
-            1: oversampling of observed seed word
+            1: oversampling of observed seed word (Deprecated)
             2: GPU sampling of seed words
         over_sampling_factor: double, optional
             the amount to oversample a seed word by in sampling scheme 1.

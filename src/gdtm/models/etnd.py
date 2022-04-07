@@ -5,6 +5,9 @@ from .tnd import TND
 
 
 class eTND(TND):
+    """
+
+    """
     topics = None
 
     def __init__(self, dataset=None, k=30, alpha=50, beta0=0.01, beta1=25, noise_words_max=200,
