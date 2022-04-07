@@ -1,6 +1,7 @@
 # Georgetown DataLab Topic Modeling package (gdtm)
 A Python Package containing wrappers and classes for topic models, including Topic-Noise Discriminator (TND), (Noiseless LDA) NLDA, Guided Topic-Noise Model (GTM), dynamic topic-noise models, and Percolation-based Topic Model (PTM).
 
+The documentation for `gdtm` can be found [here](https://gu-datalab.github.io/gdtm/).
 
 ### Requirements and setup
 to install `gdtm`, run  
