@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('../../src'))
 # -- Project information -----------------------------------------------------
 
 project = 'gdtm'
-copyright = '2022, Churchill'
-author = 'Churchill'
+copyright = '2022, Rob Churchill'
+author = 'Rob Churchill'
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.1'
@@ -30,10 +30,6 @@ release = '1.0.1'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-
-import sphinx_rtd_theme
-import m2r2
-
 extensions = [
     'm2r2',
     'sphinx_rtd_theme',

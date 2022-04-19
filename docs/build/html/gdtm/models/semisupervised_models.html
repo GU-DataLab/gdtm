@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semi-Supervised Models &mdash; gdtm 1.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Post-Processing Methods" href="postprocessing_methods.html" />
+    <link rel="prev" title="Temporal Models" href="temporal_models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> gdtm
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../gdtm.models.html">Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="topic_noise_models.html">Topic-Noise Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topic_noise_models.html#embedded-topic-noise-models">Embedded Topic-Noise Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="temporal_models.html">Temporal Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="temporal_models.html#embedded-temporal-models">Embedded Temporal Models</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Semi-Supervised Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-gdtm.models.gtm">gdtm.models.gtm module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="postprocessing_methods.html">Post-Processing Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gdtm.models.html#module-gdtm.models">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gdtm.wrappers.html">Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gdtm.helpers.html">Helpers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gdtm</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../gdtm.models.html">Models</a> &raquo;</li>
+      <li>Semi-Supervised Models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/gdtm/models/semisupervised_models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="semi-supervised-models">
+<h1>Semi-Supervised Models<a class="headerlink" href="#semi-supervised-models" title="Permalink to this headline"></a></h1>
+<section id="module-gdtm.models.gtm">
+<span id="gdtm-models-gtm-module"></span><h2>gdtm.models.gtm module<a class="headerlink" href="#module-gdtm.models.gtm" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gdtm.models.gtm.GTM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gdtm.models.gtm.</span></span><span class="sig-name descname"><span class="pre">GTM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_topics_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_beta0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_beta1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_noise_words_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gtm_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gtm_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_noise_distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gtm_tw_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gtm_topics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mallet_tnd_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mallet_gtm_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1824</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gtm_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_sampling_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_gpu_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.models.gtm.GTM" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – list of lists, required.</p></li>
+<li><p><strong>seed_topics_file</strong> – path to file containing seed topics (each line is a seed topic, delimited by commas)</p></li>
+<li><p><strong>tnd_k</strong> – int, optional:
+Number of topics to compute in TND.</p></li>
+<li><p><strong>tnd_alpha</strong> – int, optional:
+Alpha parameter of TND.</p></li>
+<li><p><strong>tnd_beta0</strong> – float, optional:
+Beta_0 parameter of TND.</p></li>
+<li><p><strong>tnd_beta1</strong> – int, optional
+Beta_1 (skew) parameter of TND.</p></li>
+<li><p><strong>tnd_noise_words_max</strong> – int, optional:
+Number of noise words to save when saving the distribution to a file.
+The top <cite>noise_words_max</cite> most probable noise words will be saved.</p></li>
+<li><p><strong>tnd_iterations</strong> – int, optional:
+Number of training iterations for TND.</p></li>
+<li><p><strong>gtm_iterations</strong> – int, optional
+Number of training iterations for the seeded model.</p></li>
+<li><p><strong>gtm_k</strong> – int, optional:
+Number of topics to compute in seeded model.</p></li>
+<li><p><strong>phi</strong> – int, optional:
+Topic weighting for noise filtering step.</p></li>
+<li><p><strong>topic_depth</strong> – int, optional:
+Number of most probable words per topic to consider for replacement in noise filtering step.</p></li>
+<li><p><strong>top_words</strong> – int, optional:
+Number of words per topic to return.</p></li>
+<li><p><strong>tnd_noise_distribution</strong> – dict, optional:
+Pre-trained noise distribution</p></li>
+<li><p><strong>gtm_tw_dist</strong> – dict, optional:
+Pre-trained topic-word distribution.</p></li>
+<li><p><strong>gtm_topics</strong> – list of lists, optional:
+Pre-computed seeded topics.</p></li>
+<li><p><strong>corpus</strong> – Gensim object, optional:
+Formatted documents for use in model.  Automatically computed if not provided.</p></li>
+<li><p><strong>dictionary</strong> – Gensim object, optional:
+Formatted word mapping for use in model.  Automatically computed if not provided.</p></li>
+<li><p><strong>mallet_tnd_path</strong> – path to Mallet TND code, required:
+Path should be <cite>path/to/mallet-tnd/bin/mallet</cite>.</p></li>
+<li><p><strong>mallet_gtm_path</strong> – path to Mallet GTM code, required:
+Path should be <cite>path/to/mallet-gtm/bin/mallet</cite>.</p></li>
+<li><p><strong>random_seed</strong> – int, optional:
+Seed for random-number generated processes.</p></li>
+<li><p><strong>run</strong> – bool, optional:
+If true, run model on initialization, if data is provided.</p></li>
+<li><p><strong>tnd_workers</strong> – int, optional:
+Number of cores to use for computation of TND.</p></li>
+<li><p><strong>gtm_workers</strong> – int, optional:
+Number of cores to use for computation of GTM.</p></li>
+<li><p><strong>over_sampling_factor</strong> – int, optional:
+Multiplicative factor to oversample seed words by.</p></li>
+<li><p><strong>seed_gpu_weights</strong> – list of lists of floats, optional:
+Same shape as seed word list, where each float corresponds to a weight to oversample the corresponding seed
+word by.  Is automatically computed by the model according to inverse document frequency if not provided.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.models.gtm.GTM.get_noise_distribution">
+<span class="sig-name descname"><span class="pre">get_noise_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tnd_noise_words_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.models.gtm.GTM.get_noise_distribution" title="Permalink to this definition"></a></dt>
+<dd><p>takes self.tnd_noise_distribution and tnd_noise_words_max
+returns a list of (noise word, frequency) tuples ranked by frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tnd_noise_words_max</strong> – number of words to return</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of (noise word, frequency) tuples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.models.gtm.GTM.get_topics">
+<span class="sig-name descname"><span class="pre">get_topics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.models.gtm.GTM.get_topics" title="Permalink to this definition"></a></dt>
+<dd><p>takes top_words and self.topics, returns a list of topic lists of length top_words</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>top_words</strong> – number of words per topic</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of topic lists</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="temporal_models.html" class="btn btn-neutral float-left" title="Temporal Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="postprocessing_methods.html" class="btn btn-neutral float-right" title="Post-Processing Methods" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Rob Churchill.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

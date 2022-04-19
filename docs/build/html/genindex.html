@@ -36,8 +36,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="readme.html">Georgetown DataLab Topic Modeling package (gdtm)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gdtm.html">gdtm package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gdtm.models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gdtm.wrappers.html">Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gdtm.helpers.html">Helpers</a></li>
 </ul>
 
         </div>
@@ -76,7 +77,6 @@
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
- | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
@@ -87,7 +87,7 @@
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper">BaseMalletWrapper (class in gdtm.wrappers.base_wrapper)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper">BaseMalletWrapper (class in gdtm.wrappers.base_wrapper)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -95,37 +95,15 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.models.html#gdtm.models.gtm.GTM.compute_gtm">compute_gtm() (gdtm.models.gtm.GTM method)</a>
+      <li><a href="gdtm/helpers/weighting.html#gdtm.helpers.weighting.compute_idf_weights">compute_idf_weights() (in module gdtm.helpers.weighting)</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.weighting.compute_idf_weights">compute_idf_weights() (in module gdtm.helpers.weighting)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.convert_input">convert_input() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
-      <li><a href="gdtm.models.html#gdtm.models.nlda.NLDA.compute_lda">compute_lda() (gdtm.models.nlda.NLDA method)</a>
-</li>
-      <li><a href="gdtm.models.html#gdtm.models.denlda.deNLDA.compute_nlda">compute_nlda() (gdtm.models.denlda.deNLDA method)</a>
-
-      <ul>
-        <li><a href="gdtm.models.html#gdtm.models.dnlda.dNLDA.compute_nlda">(gdtm.models.dnlda.dNLDA method)</a>
-</li>
-        <li><a href="gdtm.models.html#gdtm.models.nlda.NLDA.compute_nlda">(gdtm.models.nlda.NLDA method)</a>
-</li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.models.html#gdtm.models.enlda.eNLDA.compute_tnd">compute_tnd() (gdtm.models.enlda.eNLDA method)</a>
-
-      <ul>
-        <li><a href="gdtm.models.html#gdtm.models.etnd.eTND.compute_tnd">(gdtm.models.etnd.eTND method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.corpus2mallet">corpus2mallet() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
-        <li><a href="gdtm.models.html#gdtm.models.gtm.GTM.compute_tnd">(gdtm.models.gtm.GTM method)</a>
-</li>
-        <li><a href="gdtm.models.html#gdtm.models.nlda.NLDA.compute_tnd">(gdtm.models.nlda.NLDA method)</a>
-</li>
-        <li><a href="gdtm.models.html#gdtm.models.tnd.TND.compute_tnd">(gdtm.models.tnd.TND method)</a>
-</li>
-      </ul></li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.convert_input">convert_input() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
-</li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.corpus2mallet">corpus2mallet() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/models/postprocessing_methods.html#gdtm.models.cstb.cstb">cstb() (in module gdtm.models.cstb)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -133,23 +111,21 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.day">day() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.day">day() (in module gdtm.helpers.common)</a>
 </li>
-      <li><a href="gdtm.models.html#gdtm.models.denlda.deNLDA">deNLDA (class in gdtm.models.denlda)</a>
+      <li><a href="gdtm/models/temporal_models.html#gdtm.models.denlda.deNLDA">deNLDA (class in gdtm.models.denlda)</a>
 </li>
-      <li><a href="gdtm.models.html#gdtm.models.detnd.deTND">deTND (class in gdtm.models.detnd)</a>
-</li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.deTNDMallet">deTNDMallet (class in gdtm.wrappers.dtnd)</a>
+      <li><a href="gdtm/models/temporal_models.html#gdtm.models.detnd.deTND">deTND (class in gdtm.models.detnd)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.dlda.dLDAMallet">dLDAMallet (class in gdtm.wrappers.dlda)</a>
+      <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.deTNDMallet">deTNDMallet (class in gdtm.wrappers.dtnd)</a>
 </li>
-      <li><a href="gdtm.models.html#gdtm.models.dnlda.dNLDA">dNLDA (class in gdtm.models.dnlda)</a>
+      <li><a href="gdtm/models/temporal_models.html#gdtm.models.dnlda.dNLDA">dNLDA (class in gdtm.models.dnlda)</a>
 </li>
-      <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND">dTND (class in gdtm.models.dtnd)</a>
+      <li><a href="gdtm/models/temporal_models.html#gdtm.models.dtnd.dTND">dTND (class in gdtm.models.dtnd)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.dTNDMallet">dTNDMallet (class in gdtm.wrappers.dtnd)</a>
+      <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.dTNDMallet">dTNDMallet (class in gdtm.wrappers.dtnd)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -157,13 +133,13 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.models.html#gdtm.models.enlda.eNLDA">eNLDA (class in gdtm.models.enlda)</a>
+      <li><a href="gdtm/models/topic_noise_models.html#gdtm.models.enlda.eNLDA">eNLDA (class in gdtm.models.enlda)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.models.html#gdtm.models.etnd.eTND">eTND (class in gdtm.models.etnd)</a>
+      <li><a href="gdtm/models/topic_noise_models.html#gdtm.models.etnd.eTND">eTND (class in gdtm.models.etnd)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.tnd.eTNDMallet">eTNDMallet (class in gdtm.wrappers.tnd)</a>
+      <li><a href="gdtm/wrappers/topic_noise_models.html#gdtm.wrappers.tnd.eTNDMallet">eTNDMallet (class in gdtm.wrappers.tnd)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -171,57 +147,51 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.dlda.dLDAMallet.falphaarrayfile">falphaarrayfile() (gdtm.wrappers.dlda.dLDAMallet method)</a>
+      <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.deTNDMallet.falphaarrayfile">falphaarrayfile() (gdtm.wrappers.dtnd.deTNDMallet method)</a>
 
       <ul>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.deTNDMallet.falphaarrayfile">(gdtm.wrappers.dtnd.deTNDMallet method)</a>
-</li>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.dTNDMallet.falphaarrayfile">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
+        <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.dTNDMallet.falphaarrayfile">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
 </li>
       </ul></li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.dlda.dLDAMallet.fbetafile">fbetafile() (gdtm.wrappers.dlda.dLDAMallet method)</a>
+      <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.deTNDMallet.fbetafile">fbetafile() (gdtm.wrappers.dtnd.deTNDMallet method)</a>
 
       <ul>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.deTNDMallet.fbetafile">(gdtm.wrappers.dtnd.deTNDMallet method)</a>
-</li>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.dTNDMallet.fbetafile">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
+        <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.dTNDMallet.fbetafile">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
 </li>
       </ul></li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.tnd.eTNDMallet.fclosewords">fclosewords() (gdtm.wrappers.tnd.eTNDMallet method)</a>
+      <li><a href="gdtm/wrappers/topic_noise_models.html#gdtm.wrappers.tnd.eTNDMallet.fclosewords">fclosewords() (gdtm.wrappers.tnd.eTNDMallet method)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.fcorpusmallet">fcorpusmallet() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.fcorpusmallet">fcorpusmallet() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.fcorpustxt">fcorpustxt() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.fcorpustxt">fcorpustxt() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.fdoctopics">fdoctopics() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.fdoctopics">fdoctopics() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+</li>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.finferencer">finferencer() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.models.html#gdtm.models.gtm.GTM.filter_noise">filter_noise() (gdtm.models.gtm.GTM method)</a>
-</li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.finferencer">finferencer() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
-</li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.gtm.GTMMallet.fnoisefile">fnoisefile() (gdtm.wrappers.gtm.GTMMallet method)</a>
+      <li><a href="gdtm/wrappers/semisupervised_models.html#gdtm.wrappers.gtm.GTMMallet.fnoisefile">fnoisefile() (gdtm.wrappers.gtm.GTMMallet method)</a>
 
       <ul>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.tnd.TNDMallet.fnoisefile">(gdtm.wrappers.tnd.TNDMallet method)</a>
+        <li><a href="gdtm/wrappers/topic_noise_models.html#gdtm.wrappers.tnd.TNDMallet.fnoisefile">(gdtm.wrappers.tnd.TNDMallet method)</a>
 </li>
       </ul></li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.fortnight">fortnight() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.fortnight">fortnight() (in module gdtm.helpers.common)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.gtm.GTMMallet.fseedgpuweights">fseedgpuweights() (gdtm.wrappers.gtm.GTMMallet method)</a>
+      <li><a href="gdtm/wrappers/semisupervised_models.html#gdtm.wrappers.gtm.GTMMallet.fseedgpuweights">fseedgpuweights() (gdtm.wrappers.gtm.GTMMallet method)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.fstate">fstate() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.fstate">fstate() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.ftopickeys">ftopickeys() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.ftopickeys">ftopickeys() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.deTNDMallet.ftwdistfile">ftwdistfile() (gdtm.wrappers.dtnd.deTNDMallet method)</a>
+      <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.deTNDMallet.ftwdistfile">ftwdistfile() (gdtm.wrappers.dtnd.deTNDMallet method)</a>
 
       <ul>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.dTNDMallet.ftwdistfile">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
+        <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.dTNDMallet.ftwdistfile">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
 </li>
       </ul></li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.fwordweights">fwordweights() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.fwordweights">fwordweights() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -237,31 +207,24 @@
 </li>
       </ul></li>
       <li>
-    gdtm.helpers
-
-      <ul>
-        <li><a href="gdtm.helpers.html#module-gdtm.helpers">module</a>
-</li>
-      </ul></li>
-      <li>
     gdtm.helpers.common
 
       <ul>
-        <li><a href="gdtm.helpers.html#module-gdtm.helpers.common">module</a>
+        <li><a href="gdtm/helpers/common.html#module-gdtm.helpers.common">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.helpers.exceptions
 
       <ul>
-        <li><a href="gdtm.helpers.html#module-gdtm.helpers.exceptions">module</a>
+        <li><a href="gdtm/helpers/exceptions.html#module-gdtm.helpers.exceptions">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.helpers.weighting
 
       <ul>
-        <li><a href="gdtm.helpers.html#module-gdtm.helpers.weighting">module</a>
+        <li><a href="gdtm/helpers/weighting.html#module-gdtm.helpers.weighting">module</a>
 </li>
       </ul></li>
       <li>
@@ -272,66 +235,73 @@
 </li>
       </ul></li>
       <li>
+    gdtm.models.cstb
+
+      <ul>
+        <li><a href="gdtm/models/postprocessing_methods.html#module-gdtm.models.cstb">module</a>
+</li>
+      </ul></li>
+      <li>
     gdtm.models.denlda
 
       <ul>
-        <li><a href="gdtm.models.html#module-gdtm.models.denlda">module</a>
+        <li><a href="gdtm/models/temporal_models.html#module-gdtm.models.denlda">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.models.detnd
 
       <ul>
-        <li><a href="gdtm.models.html#module-gdtm.models.detnd">module</a>
+        <li><a href="gdtm/models/temporal_models.html#module-gdtm.models.detnd">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.models.dnlda
 
       <ul>
-        <li><a href="gdtm.models.html#module-gdtm.models.dnlda">module</a>
+        <li><a href="gdtm/models/temporal_models.html#module-gdtm.models.dnlda">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.models.dtnd
 
       <ul>
-        <li><a href="gdtm.models.html#module-gdtm.models.dtnd">module</a>
+        <li><a href="gdtm/models/temporal_models.html#module-gdtm.models.dtnd">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.models.enlda
 
       <ul>
-        <li><a href="gdtm.models.html#module-gdtm.models.enlda">module</a>
+        <li><a href="gdtm/models/topic_noise_models.html#module-gdtm.models.enlda">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.models.etnd
 
       <ul>
-        <li><a href="gdtm.models.html#module-gdtm.models.etnd">module</a>
+        <li><a href="gdtm/models/topic_noise_models.html#module-gdtm.models.etnd">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.models.gtm
 
       <ul>
-        <li><a href="gdtm.models.html#module-gdtm.models.gtm">module</a>
+        <li><a href="gdtm/models/semisupervised_models.html#module-gdtm.models.gtm">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.models.nlda
 
       <ul>
-        <li><a href="gdtm.models.html#module-gdtm.models.nlda">module</a>
+        <li><a href="gdtm/models/topic_noise_models.html#module-gdtm.models.nlda">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.models.tnd
 
       <ul>
-        <li><a href="gdtm.models.html#module-gdtm.models.tnd">module</a>
+        <li><a href="gdtm/models/topic_noise_models.html#module-gdtm.models.tnd">module</a>
 </li>
       </ul></li>
   </ul></td>
@@ -347,81 +317,74 @@
     gdtm.wrappers.base_wrapper
 
       <ul>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.base_wrapper">module</a>
-</li>
-      </ul></li>
-      <li>
-    gdtm.wrappers.dlda
-
-      <ul>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.dlda">module</a>
+        <li><a href="gdtm/wrappers/base_wrappers.html#module-gdtm.wrappers.base_wrapper">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.wrappers.dtnd
 
       <ul>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.dtnd">module</a>
+        <li><a href="gdtm/wrappers/temporal_models.html#module-gdtm.wrappers.dtnd">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.wrappers.gtm
 
       <ul>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.gtm">module</a>
+        <li><a href="gdtm/wrappers/semisupervised_models.html#module-gdtm.wrappers.gtm">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.wrappers.lda
 
       <ul>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.lda">module</a>
+        <li><a href="gdtm/wrappers/base_wrappers.html#module-gdtm.wrappers.lda">module</a>
 </li>
       </ul></li>
       <li>
     gdtm.wrappers.tnd
 
       <ul>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.tnd">module</a>
+        <li><a href="gdtm/wrappers/topic_noise_models.html#module-gdtm.wrappers.tnd">module</a>
 </li>
       </ul></li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.tnd.eTNDMallet.get_closest_embedded_words">get_closest_embedded_words() (gdtm.wrappers.tnd.eTNDMallet method)</a>
+      <li><a href="gdtm/wrappers/topic_noise_models.html#gdtm.wrappers.tnd.eTNDMallet.get_closest_embedded_words">get_closest_embedded_words() (gdtm.wrappers.tnd.eTNDMallet method)</a>
 </li>
-      <li><a href="gdtm.models.html#gdtm.models.dnlda.dNLDA.get_noise_distribution">get_noise_distribution() (gdtm.models.dnlda.dNLDA method)</a>
+      <li><a href="gdtm/models/temporal_models.html#gdtm.models.dnlda.dNLDA.get_noise_distribution">get_noise_distribution() (gdtm.models.dnlda.dNLDA method)</a>
 
       <ul>
-        <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND.get_noise_distribution">(gdtm.models.dtnd.dTND method)</a>
+        <li><a href="gdtm/models/temporal_models.html#gdtm.models.dtnd.dTND.get_noise_distribution">(gdtm.models.dtnd.dTND method)</a>
 </li>
-        <li><a href="gdtm.models.html#gdtm.models.gtm.GTM.get_noise_distribution">(gdtm.models.gtm.GTM method)</a>
+        <li><a href="gdtm/models/semisupervised_models.html#gdtm.models.gtm.GTM.get_noise_distribution">(gdtm.models.gtm.GTM method)</a>
 </li>
-        <li><a href="gdtm.models.html#gdtm.models.nlda.NLDA.get_noise_distribution">(gdtm.models.nlda.NLDA method)</a>
+        <li><a href="gdtm/models/topic_noise_models.html#gdtm.models.nlda.NLDA.get_noise_distribution">(gdtm.models.nlda.NLDA method)</a>
 </li>
-        <li><a href="gdtm.models.html#gdtm.models.tnd.TND.get_noise_distribution">(gdtm.models.tnd.TND method)</a>
+        <li><a href="gdtm/models/topic_noise_models.html#gdtm.models.tnd.TND.get_noise_distribution">(gdtm.models.tnd.TND method)</a>
 </li>
       </ul></li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.get_time_periods">get_time_periods() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.get_time_periods">get_time_periods() (in module gdtm.helpers.common)</a>
 </li>
-      <li><a href="gdtm.models.html#gdtm.models.dnlda.dNLDA.get_topics">get_topics() (gdtm.models.dnlda.dNLDA method)</a>
+      <li><a href="gdtm/models/temporal_models.html#gdtm.models.dnlda.dNLDA.get_topics">get_topics() (gdtm.models.dnlda.dNLDA method)</a>
 
       <ul>
-        <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND.get_topics">(gdtm.models.dtnd.dTND method)</a>
+        <li><a href="gdtm/models/temporal_models.html#gdtm.models.dtnd.dTND.get_topics">(gdtm.models.dtnd.dTND method)</a>
 </li>
-        <li><a href="gdtm.models.html#gdtm.models.gtm.GTM.get_topics">(gdtm.models.gtm.GTM method)</a>
+        <li><a href="gdtm/models/semisupervised_models.html#gdtm.models.gtm.GTM.get_topics">(gdtm.models.gtm.GTM method)</a>
 </li>
-        <li><a href="gdtm.models.html#gdtm.models.nlda.NLDA.get_topics">(gdtm.models.nlda.NLDA method)</a>
+        <li><a href="gdtm/models/topic_noise_models.html#gdtm.models.nlda.NLDA.get_topics">(gdtm.models.nlda.NLDA method)</a>
 </li>
-        <li><a href="gdtm.models.html#gdtm.models.tnd.TND.get_topics">(gdtm.models.tnd.TND method)</a>
+        <li><a href="gdtm/models/topic_noise_models.html#gdtm.models.tnd.TND.get_topics">(gdtm.models.tnd.TND method)</a>
 </li>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.get_topics">(gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+        <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.get_topics">(gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
       </ul></li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.get_version">get_version() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.get_version">get_version() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.get_vocabulary">get_vocabulary() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.get_vocabulary">get_vocabulary() (in module gdtm.helpers.common)</a>
 </li>
-      <li><a href="gdtm.models.html#gdtm.models.gtm.GTM">GTM (class in gdtm.models.gtm)</a>
+      <li><a href="gdtm/models/semisupervised_models.html#gdtm.models.gtm.GTM">GTM (class in gdtm.models.gtm)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.gtm.GTMMallet">GTMMallet (class in gdtm.wrappers.gtm)</a>
+      <li><a href="gdtm/wrappers/semisupervised_models.html#gdtm.wrappers.gtm.GTMMallet">GTMMallet (class in gdtm.wrappers.gtm)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -429,69 +392,41 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.models.html#gdtm.models.detnd.deTND.last_alpha_array_file">last_alpha_array_file (gdtm.models.detnd.deTND attribute)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.lda.LDAMallet">LDAMallet (class in gdtm.wrappers.lda)</a>
+</li>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.load">load() (gdtm.wrappers.base_wrapper.BaseMalletWrapper class method)</a>
+</li>
+      <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.deTNDMallet.load_alpha_array">load_alpha_array() (gdtm.wrappers.dtnd.deTNDMallet method)</a>
 
       <ul>
-        <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND.last_alpha_array_file">(gdtm.models.dtnd.dTND attribute)</a>
+        <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.dTNDMallet.load_alpha_array">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
 </li>
       </ul></li>
-      <li><a href="gdtm.models.html#gdtm.models.detnd.deTND.last_beta">last_beta (gdtm.models.detnd.deTND attribute)</a>
+      <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.deTNDMallet.load_beta">load_beta() (gdtm.wrappers.dtnd.deTNDMallet method)</a>
 
       <ul>
-        <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND.last_beta">(gdtm.models.dtnd.dTND attribute)</a>
+        <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.dTNDMallet.load_beta">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
 </li>
       </ul></li>
-      <li><a href="gdtm.models.html#gdtm.models.detnd.deTND.last_noise_dist_file">last_noise_dist_file (gdtm.models.detnd.deTND attribute)</a>
-
-      <ul>
-        <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND.last_noise_dist_file">(gdtm.models.dtnd.dTND attribute)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.load_dated_dataset">load_dated_dataset() (in module gdtm.helpers.common)</a>
 </li>
-      </ul></li>
-      <li><a href="gdtm.models.html#gdtm.models.detnd.deTND.last_tw_dist_file">last_tw_dist_file (gdtm.models.detnd.deTND attribute)</a>
-
-      <ul>
-        <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND.last_tw_dist_file">(gdtm.models.dtnd.dTND attribute)</a>
-</li>
-      </ul></li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.lda.LDAMallet">LDAMallet (class in gdtm.wrappers.lda)</a>
-</li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.load">load() (gdtm.wrappers.base_wrapper.BaseMalletWrapper class method)</a>
-</li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.dlda.dLDAMallet.load_alpha_array">load_alpha_array() (gdtm.wrappers.dlda.dLDAMallet method)</a>
-
-      <ul>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.deTNDMallet.load_alpha_array">(gdtm.wrappers.dtnd.deTNDMallet method)</a>
-</li>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.dTNDMallet.load_alpha_array">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
-</li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.dlda.dLDAMallet.load_beta">load_beta() (gdtm.wrappers.dlda.dLDAMallet method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.load_document_topics">load_document_topics() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+</li>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.load_flat_dataset">load_flat_dataset() (in module gdtm.helpers.common)</a>
+</li>
+      <li><a href="gdtm/wrappers/topic_noise_models.html#gdtm.wrappers.tnd.TNDMallet.load_noise_dist">load_noise_dist() (gdtm.wrappers.tnd.TNDMallet method)</a>
 
       <ul>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.deTNDMallet.load_beta">(gdtm.wrappers.dtnd.deTNDMallet method)</a>
-</li>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.dTNDMallet.load_beta">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
+        <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.load_noise_dist">(in module gdtm.helpers.common)</a>
 </li>
       </ul></li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.load_dated_dataset">load_dated_dataset() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.load_split_dataset">load_split_dataset() (in module gdtm.helpers.common)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.load_document_topics">load_document_topics() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.load_topics">load_topics() (in module gdtm.helpers.common)</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.load_flat_dataset">load_flat_dataset() (in module gdtm.helpers.common)</a>
-</li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.tnd.TNDMallet.load_noise_dist">load_noise_dist() (gdtm.wrappers.tnd.TNDMallet method)</a>
-
-      <ul>
-        <li><a href="gdtm.helpers.html#gdtm.helpers.common.load_noise_dist">(in module gdtm.helpers.common)</a>
-</li>
-      </ul></li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.load_split_dataset">load_split_dataset() (in module gdtm.helpers.common)</a>
-</li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.load_topics">load_topics() (in module gdtm.helpers.common)</a>
-</li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.load_word_topics">load_word_topics() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.load_word_topics">load_word_topics() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -499,17 +434,17 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.malletmodel2ldamodel">malletmodel2ldamodel() (in module gdtm.wrappers.base_wrapper)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.malletmodel2ldamodel">malletmodel2ldamodel() (in module gdtm.wrappers.base_wrapper)</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.exceptions.MissingDataSetError">MissingDataSetError</a>
+      <li><a href="gdtm/helpers/exceptions.html#gdtm.helpers.exceptions.MissingDataSetError">MissingDataSetError</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.exceptions.MissingEmbeddingPathError">MissingEmbeddingPathError</a>
+      <li><a href="gdtm/helpers/exceptions.html#gdtm.helpers.exceptions.MissingEmbeddingPathError">MissingEmbeddingPathError</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.exceptions.MissingModelError">MissingModelError</a>
+      <li><a href="gdtm/helpers/exceptions.html#gdtm.helpers.exceptions.MissingModelError">MissingModelError</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.exceptions.MissingSeedsError">MissingSeedsError</a>
+      <li><a href="gdtm/helpers/exceptions.html#gdtm.helpers.exceptions.MissingSeedsError">MissingSeedsError</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.exceptions.MissingSeedWeightsError">MissingSeedWeightsError</a>
+      <li><a href="gdtm/helpers/exceptions.html#gdtm.helpers.exceptions.MissingSeedWeightsError">MissingSeedWeightsError</a>
 </li>
       <li>
     module
@@ -517,52 +452,50 @@
       <ul>
         <li><a href="gdtm.html#module-gdtm">gdtm</a>
 </li>
-        <li><a href="gdtm.helpers.html#module-gdtm.helpers">gdtm.helpers</a>
+        <li><a href="gdtm/helpers/common.html#module-gdtm.helpers.common">gdtm.helpers.common</a>
 </li>
-        <li><a href="gdtm.helpers.html#module-gdtm.helpers.common">gdtm.helpers.common</a>
+        <li><a href="gdtm/helpers/exceptions.html#module-gdtm.helpers.exceptions">gdtm.helpers.exceptions</a>
 </li>
-        <li><a href="gdtm.helpers.html#module-gdtm.helpers.exceptions">gdtm.helpers.exceptions</a>
-</li>
-        <li><a href="gdtm.helpers.html#module-gdtm.helpers.weighting">gdtm.helpers.weighting</a>
+        <li><a href="gdtm/helpers/weighting.html#module-gdtm.helpers.weighting">gdtm.helpers.weighting</a>
 </li>
         <li><a href="gdtm.models.html#module-gdtm.models">gdtm.models</a>
 </li>
-        <li><a href="gdtm.models.html#module-gdtm.models.denlda">gdtm.models.denlda</a>
+        <li><a href="gdtm/models/postprocessing_methods.html#module-gdtm.models.cstb">gdtm.models.cstb</a>
 </li>
-        <li><a href="gdtm.models.html#module-gdtm.models.detnd">gdtm.models.detnd</a>
+        <li><a href="gdtm/models/temporal_models.html#module-gdtm.models.denlda">gdtm.models.denlda</a>
 </li>
-        <li><a href="gdtm.models.html#module-gdtm.models.dnlda">gdtm.models.dnlda</a>
+        <li><a href="gdtm/models/temporal_models.html#module-gdtm.models.detnd">gdtm.models.detnd</a>
 </li>
-        <li><a href="gdtm.models.html#module-gdtm.models.dtnd">gdtm.models.dtnd</a>
+        <li><a href="gdtm/models/temporal_models.html#module-gdtm.models.dnlda">gdtm.models.dnlda</a>
 </li>
-        <li><a href="gdtm.models.html#module-gdtm.models.enlda">gdtm.models.enlda</a>
+        <li><a href="gdtm/models/temporal_models.html#module-gdtm.models.dtnd">gdtm.models.dtnd</a>
 </li>
-        <li><a href="gdtm.models.html#module-gdtm.models.etnd">gdtm.models.etnd</a>
+        <li><a href="gdtm/models/topic_noise_models.html#module-gdtm.models.enlda">gdtm.models.enlda</a>
 </li>
-        <li><a href="gdtm.models.html#module-gdtm.models.gtm">gdtm.models.gtm</a>
+        <li><a href="gdtm/models/topic_noise_models.html#module-gdtm.models.etnd">gdtm.models.etnd</a>
 </li>
-        <li><a href="gdtm.models.html#module-gdtm.models.nlda">gdtm.models.nlda</a>
+        <li><a href="gdtm/models/semisupervised_models.html#module-gdtm.models.gtm">gdtm.models.gtm</a>
 </li>
-        <li><a href="gdtm.models.html#module-gdtm.models.tnd">gdtm.models.tnd</a>
+        <li><a href="gdtm/models/topic_noise_models.html#module-gdtm.models.nlda">gdtm.models.nlda</a>
+</li>
+        <li><a href="gdtm/models/topic_noise_models.html#module-gdtm.models.tnd">gdtm.models.tnd</a>
 </li>
         <li><a href="gdtm.wrappers.html#module-gdtm.wrappers">gdtm.wrappers</a>
 </li>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.base_wrapper">gdtm.wrappers.base_wrapper</a>
+        <li><a href="gdtm/wrappers/base_wrappers.html#module-gdtm.wrappers.base_wrapper">gdtm.wrappers.base_wrapper</a>
 </li>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.dlda">gdtm.wrappers.dlda</a>
+        <li><a href="gdtm/wrappers/temporal_models.html#module-gdtm.wrappers.dtnd">gdtm.wrappers.dtnd</a>
 </li>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.dtnd">gdtm.wrappers.dtnd</a>
+        <li><a href="gdtm/wrappers/semisupervised_models.html#module-gdtm.wrappers.gtm">gdtm.wrappers.gtm</a>
 </li>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.gtm">gdtm.wrappers.gtm</a>
+        <li><a href="gdtm/wrappers/base_wrappers.html#module-gdtm.wrappers.lda">gdtm.wrappers.lda</a>
 </li>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.lda">gdtm.wrappers.lda</a>
-</li>
-        <li><a href="gdtm.wrappers.html#module-gdtm.wrappers.tnd">gdtm.wrappers.tnd</a>
+        <li><a href="gdtm/wrappers/topic_noise_models.html#module-gdtm.wrappers.tnd">gdtm.wrappers.tnd</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.month">month() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.month">month() (in module gdtm.helpers.common)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -570,85 +503,45 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.models.html#gdtm.models.nlda.NLDA">NLDA (class in gdtm.models.nlda)</a>
+      <li><a href="gdtm/models/topic_noise_models.html#gdtm.models.nlda.NLDA">NLDA (class in gdtm.models.nlda)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND.noise_distribution">noise_distribution (gdtm.models.dtnd.dTND attribute)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.none">none() (in module gdtm.helpers.common)</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.none">none() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/exceptions.html#gdtm.helpers.exceptions.NotEnoughTopicSetsError">NotEnoughTopicSetsError</a>
 </li>
-  </ul></td>
-</tr></table>
-
-<h2 id="P">P</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.models.html#gdtm.models.dnlda.dNLDA.prepare_data">prepare_data() (gdtm.models.dnlda.dNLDA method)</a>
-
-      <ul>
-        <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND.prepare_data">(gdtm.models.dtnd.dTND method)</a>
-</li>
-        <li><a href="gdtm.models.html#gdtm.models.gtm.GTM.prepare_data">(gdtm.models.gtm.GTM method)</a>
-</li>
-        <li><a href="gdtm.models.html#gdtm.models.nlda.NLDA.prepare_data">(gdtm.models.nlda.NLDA method)</a>
-</li>
-        <li><a href="gdtm.models.html#gdtm.models.tnd.TND.prepare_data">(gdtm.models.tnd.TND method)</a>
-</li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.read_doctopics">read_doctopics() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.read_doctopics">read_doctopics() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
-      <li><a href="gdtm.models.html#gdtm.models.detnd.deTND.run_all_time_periods">run_all_time_periods() (gdtm.models.detnd.deTND method)</a>
-
-      <ul>
-        <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND.run_all_time_periods">(gdtm.models.dtnd.dTND method)</a>
-</li>
-      </ul></li>
-      <li><a href="gdtm.models.html#gdtm.models.dnlda.dNLDA.run_nlda_all_time_periods">run_nlda_all_time_periods() (gdtm.models.dnlda.dNLDA method)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.models.html#gdtm.models.denlda.deNLDA.run_nlda_one_time_period">run_nlda_one_time_period() (gdtm.models.denlda.deNLDA method)</a>
-
-      <ul>
-        <li><a href="gdtm.models.html#gdtm.models.dnlda.dNLDA.run_nlda_one_time_period">(gdtm.models.dnlda.dNLDA method)</a>
-</li>
-      </ul></li>
-      <li><a href="gdtm.models.html#gdtm.models.detnd.deTND.run_one_time_period">run_one_time_period() (gdtm.models.detnd.deTND method)</a>
-
-      <ul>
-        <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND.run_one_time_period">(gdtm.models.dtnd.dTND method)</a>
-</li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.save_flat_dataset">save_flat_dataset() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.save_flat_dataset">save_flat_dataset() (in module gdtm.helpers.common)</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.save_noise_dist">save_noise_dist() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.save_noise_dist">save_noise_dist() (in module gdtm.helpers.common)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.gtm.GTMMallet.save_seed_gpu_weights">save_seed_gpu_weights() (gdtm.wrappers.gtm.GTMMallet method)</a>
+      <li><a href="gdtm/wrappers/semisupervised_models.html#gdtm.wrappers.gtm.GTMMallet.save_seed_gpu_weights">save_seed_gpu_weights() (gdtm.wrappers.gtm.GTMMallet method)</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.save_split_dataset">save_split_dataset() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.save_split_dataset">save_split_dataset() (in module gdtm.helpers.common)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.save_topics">save_topics() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.save_topics">save_topics() (in module gdtm.helpers.common)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.show_topic">show_topic() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.show_topic">show_topic() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.show_topics">show_topics() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
+      <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper.show_topics">show_topics() (gdtm.wrappers.base_wrapper.BaseMalletWrapper method)</a>
 </li>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.split_dataset_by_date">split_dataset_by_date() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.split_dataset_by_date">split_dataset_by_date() (in module gdtm.helpers.common)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -656,48 +549,22 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.models.html#gdtm.models.dnlda.dNLDA.test_all_phi_and_depths">test_all_phi_and_depths() (gdtm.models.dnlda.dNLDA method)</a>
+      <li><a href="gdtm/models/topic_noise_models.html#gdtm.models.tnd.TND">TND (class in gdtm.models.tnd)</a>
 </li>
-      <li><a href="gdtm.models.html#gdtm.models.tnd.TND">TND (class in gdtm.models.tnd)</a>
+      <li><a href="gdtm/wrappers/topic_noise_models.html#gdtm.wrappers.tnd.TNDMallet">TNDMallet (class in gdtm.wrappers.tnd)</a>
 </li>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.tnd.TNDMallet">TNDMallet (class in gdtm.wrappers.tnd)</a>
-</li>
-      <li><a href="gdtm.models.html#gdtm.models.denlda.deNLDA.topics">topics (gdtm.models.denlda.deNLDA attribute)</a>
+      <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.deTNDMallet.train">train() (gdtm.wrappers.dtnd.deTNDMallet method)</a>
 
       <ul>
-        <li><a href="gdtm.models.html#gdtm.models.detnd.deTND.topics">(gdtm.models.detnd.deTND attribute)</a>
+        <li><a href="gdtm/wrappers/temporal_models.html#gdtm.wrappers.dtnd.dTNDMallet.train">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
 </li>
-        <li><a href="gdtm.models.html#gdtm.models.dnlda.dNLDA.topics">(gdtm.models.dnlda.dNLDA attribute)</a>
+        <li><a href="gdtm/wrappers/semisupervised_models.html#gdtm.wrappers.gtm.GTMMallet.train">(gdtm.wrappers.gtm.GTMMallet method)</a>
 </li>
-        <li><a href="gdtm.models.html#gdtm.models.dtnd.dTND.topics">(gdtm.models.dtnd.dTND attribute)</a>
+        <li><a href="gdtm/wrappers/base_wrappers.html#gdtm.wrappers.lda.LDAMallet.train">(gdtm.wrappers.lda.LDAMallet method)</a>
 </li>
-        <li><a href="gdtm.models.html#gdtm.models.enlda.eNLDA.topics">(gdtm.models.enlda.eNLDA attribute)</a>
+        <li><a href="gdtm/wrappers/topic_noise_models.html#gdtm.wrappers.tnd.eTNDMallet.train">(gdtm.wrappers.tnd.eTNDMallet method)</a>
 </li>
-        <li><a href="gdtm.models.html#gdtm.models.etnd.eTND.topics">(gdtm.models.etnd.eTND attribute)</a>
-</li>
-        <li><a href="gdtm.models.html#gdtm.models.gtm.GTM.topics">(gdtm.models.gtm.GTM attribute)</a>
-</li>
-        <li><a href="gdtm.models.html#gdtm.models.nlda.NLDA.topics">(gdtm.models.nlda.NLDA attribute)</a>
-</li>
-        <li><a href="gdtm.models.html#gdtm.models.tnd.TND.topics">(gdtm.models.tnd.TND attribute)</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.wrappers.html#gdtm.wrappers.dlda.dLDAMallet.train">train() (gdtm.wrappers.dlda.dLDAMallet method)</a>
-
-      <ul>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.deTNDMallet.train">(gdtm.wrappers.dtnd.deTNDMallet method)</a>
-</li>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.dtnd.dTNDMallet.train">(gdtm.wrappers.dtnd.dTNDMallet method)</a>
-</li>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.gtm.GTMMallet.train">(gdtm.wrappers.gtm.GTMMallet method)</a>
-</li>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.lda.LDAMallet.train">(gdtm.wrappers.lda.LDAMallet method)</a>
-</li>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.tnd.eTNDMallet.train">(gdtm.wrappers.tnd.eTNDMallet method)</a>
-</li>
-        <li><a href="gdtm.wrappers.html#gdtm.wrappers.tnd.TNDMallet.train">(gdtm.wrappers.tnd.TNDMallet method)</a>
+        <li><a href="gdtm/wrappers/topic_noise_models.html#gdtm.wrappers.tnd.TNDMallet.train">(gdtm.wrappers.tnd.TNDMallet method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -706,7 +573,7 @@
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.week">week() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.week">week() (in module gdtm.helpers.common)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -714,7 +581,7 @@
 <h2 id="Y">Y</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gdtm.helpers.html#gdtm.helpers.common.year">year() (in module gdtm.helpers.common)</a>
+      <li><a href="gdtm/helpers/common.html#gdtm.helpers.common.year">year() (in module gdtm.helpers.common)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -728,7 +595,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Churchill.</p>
+    <p>&#169; Copyright 2022, Rob Churchill.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

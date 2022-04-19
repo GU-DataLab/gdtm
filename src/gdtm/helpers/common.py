@@ -28,12 +28,13 @@ def load_dated_dataset(path, date_delimiter='\t', doc_delimiter=' '):
 
 def save_split_dataset(path, file_name, dataset, delimiter=' '):
     '''
+    Saves a data set sliced into tranches for temporal modeling.
 
-    :param path: PATH SHOULD BE PATH AND NOT A FILE NAME
+    :param path: PATH SHOULD BE A PATH AND NOT A FILE NAME
     :param file_name: the name of the data set
     :param dataset:
     :param delimiter:
-    :return:
+    :return: None
     '''
     for i in range(0, len(dataset)):
         with open('{}{}_{}.csv'.format(path, file_name, i), 'w') as f:

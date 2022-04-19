@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topic-Noise Model Wrappers &mdash; gdtm 1.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Temporal Model Wrappers" href="temporal_models.html" />
+    <link rel="prev" title="Base Model Wrappers" href="base_wrappers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> gdtm
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../gdtm.models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../gdtm.wrappers.html">Wrappers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="base_wrappers.html">Base Model Wrappers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Topic-Noise Model Wrappers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gdtm-wrappers-tnd-module">gdtm.wrappers.tnd module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gdtm-wrappers-nlda-module">gdtm.wrappers.nlda module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="temporal_models.html">Temporal Model Wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="semisupervised_models.html">Semi-Supervised Model Wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gdtm.wrappers.html#module-gdtm.wrappers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gdtm.helpers.html">Helpers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gdtm</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../gdtm.wrappers.html">Wrappers</a> &raquo;</li>
+      <li>Topic-Noise Model Wrappers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/gdtm/wrappers/topic_noise_models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="topic-noise-model-wrappers">
+<h1>Topic-Noise Model Wrappers<a class="headerlink" href="#topic-noise-model-wrappers" title="Permalink to this headline"></a></h1>
+<section id="gdtm-wrappers-tnd-module">
+<h2>gdtm.wrappers.tnd module<a class="headerlink" href="#gdtm-wrappers-tnd-module" title="Permalink to this headline"></a></h2>
+<span class="target" id="module-gdtm.wrappers.tnd"></span><p>Python wrapper for <cite>Topic Noise Discriminator (TND)</cite>
+adapted from <cite>MALLET, the Java topic modelling toolkit &lt;http://mallet.cs.umass.edu/&gt;</cite>
+TND source code can be found here: &lt;<a class="reference external" href="https://github.com/GU-DataLab/topic-noise-models-source">https://github.com/GU-DataLab/topic-noise-models-source</a>&gt;</p>
+<p>This module allows both TND model estimation from a training corpus and inference of topic distribution on new,
+unseen documents, using an (optimized version of) collapsed gibbs sampling from MALLET.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="gdtm.wrappers.tnd.TNDMallet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gdtm.wrappers.tnd.</span></span><span class="sig-name descname"><span class="pre">TNDMallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mallet_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_topics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id2word</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimize_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_words_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skew</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.wrappers.tnd.TNDMallet" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_wrappers.html#gdtm.wrappers.base_wrapper.BaseMalletWrapper" title="gdtm.wrappers.base_wrapper.BaseMalletWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">gdtm.wrappers.base_wrapper.BaseMalletWrapper</span></code></a></p>
+<p>Python wrapper for TND using <cite>MALLET &lt;http://mallet.cs.umass.edu/&gt;</cite>.
+TND’s source code can be found here: &lt;<a class="reference external" href="https://github.com/GU-DataLab/topic-noise-models-source">https://github.com/GU-DataLab/topic-noise-models-source</a>&gt;.</p>
+<p>Communication between MALLET and Python takes place by passing around data files on disk
+and calling Java with subprocess.call().</p>
+<p>This is <strong>only</strong> python wrapper for <cite>MALLET TND</cite>,
+you need to install original implementation first and pass the path to binary to <code class="docutils literal notranslate"><span class="pre">mallet_path</span></code>.</p>
+<blockquote>
+<div><dl>
+<dt>mallet_path<span class="classifier">str</span></dt><dd><p>Path to the mallet binary, e.g. <cite>/home/username/mallet-tnd/bin/mallet</cite>.</p>
+</dd>
+<dt>corpus<span class="classifier">iterable of iterable of (int, int), optional</span></dt><dd><p>Collection of texts in BoW format.</p>
+</dd>
+<dt>num_topics<span class="classifier">int, optional</span></dt><dd><p>Number of topics.</p>
+</dd>
+<dt>alpha<span class="classifier">int, optional</span></dt><dd><p>Alpha parameter of TND.</p>
+</dd>
+<dt>beta<span class="classifier">float, optional</span></dt><dd><p>Beta parameter of TND</p>
+</dd>
+<dt>id2word<span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dictionary</span></code>, optional</span></dt><dd><p>Mapping between tokens ids and words from corpus, if not specified - will be inferred from <cite>corpus</cite>.</p>
+</dd>
+<dt>workers<span class="classifier">int, optional</span></dt><dd><p>Number of threads that will be used for training.</p>
+</dd>
+<dt>prefix<span class="classifier">str, optional</span></dt><dd><p>Prefix for produced temporary files.</p>
+</dd>
+<dt>optimize_interval<span class="classifier">int, optional</span></dt><dd><p>Optimize hyperparameters every <cite>optimize_interval</cite> iterations
+(sometimes leads to Java exception 0 to switch off hyperparameter optimization).</p>
+</dd>
+<dt>iterations<span class="classifier">int, optional</span></dt><dd><p>Number of training iterations.</p>
+</dd>
+<dt>topic_threshold<span class="classifier">float, optional</span></dt><dd><p>Threshold of the probability above which we consider a topic.</p>
+</dd>
+<dt>random_seed: int, optional</dt><dd><p>Random seed to ensure consistent results, if 0 - use system clock.</p>
+</dd>
+<dt>noise_words_max: int, optional</dt><dd><p>Number of noise words to save when saving the distribution to a file.
+The top <cite>noise_words_max</cite> most probable noise words will be saved.</p>
+</dd>
+<dt>skew: int, optional</dt><dd><p>Akin to the gamma parameter in the paper, increasing <cite>skew</cite> increases the probability of each word being
+assigned to a topic over noise</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.wrappers.tnd.TNDMallet.fnoisefile">
+<span class="sig-name descname"><span class="pre">fnoisefile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.wrappers.tnd.TNDMallet.fnoisefile" title="Permalink to this definition"></a></dt>
+<dd><p>Get path to noise file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+<p>str
+|   Path to noise distribution file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.wrappers.tnd.TNDMallet.load_noise_dist">
+<span class="sig-name descname"><span class="pre">load_noise_dist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.wrappers.tnd.TNDMallet.load_noise_dist" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.wrappers.tnd.TNDMallet.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.wrappers.tnd.TNDMallet.train" title="Permalink to this definition"></a></dt>
+<dd><p>Train Mallet LDA.</p>
+<dl class="simple">
+<dt>corpus<span class="classifier">iterable of iterable of (int, int)</span></dt><dd><p>Corpus in BoW format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gdtm.wrappers.tnd.eTNDMallet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gdtm.wrappers.tnd.</span></span><span class="sig-name descname"><span class="pre">eTNDMallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mallet_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_topics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id2word</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimize_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_words_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skew</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closest_x_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.wrappers.tnd.eTNDMallet" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gdtm.wrappers.tnd.TNDMallet" title="gdtm.wrappers.tnd.TNDMallet"><code class="xref py py-class docutils literal notranslate"><span class="pre">gdtm.wrappers.tnd.TNDMallet</span></code></a></p>
+<p>Python wrapper for eTND using <cite>MALLET &lt;http://mallet.cs.umass.edu/&gt;</cite>.</p>
+<p>Communication between MALLET and Python takes place by passing around data files on disk
+and calling Java with subprocess.call().</p>
+<p>This is <strong>only</strong> python wrapper for <cite>MALLET LDA &lt;http://mallet.cs.umass.edu/&gt;</cite>,
+you need to install original implementation first and pass the path to binary to <code class="docutils literal notranslate"><span class="pre">mallet_path</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.wrappers.tnd.eTNDMallet.fclosewords">
+<span class="sig-name descname"><span class="pre">fclosewords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.wrappers.tnd.eTNDMallet.fclosewords" title="Permalink to this definition"></a></dt>
+<dd><p>Get path to closest words to each word in embedding space</p>
+<p>str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.wrappers.tnd.eTNDMallet.get_closest_embedded_words">
+<span class="sig-name descname"><span class="pre">get_closest_embedded_words</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.wrappers.tnd.eTNDMallet.get_closest_embedded_words" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.wrappers.tnd.eTNDMallet.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.wrappers.tnd.eTNDMallet.train" title="Permalink to this definition"></a></dt>
+<dd><p>Train Mallet LDA.</p>
+<dl class="simple">
+<dt>corpus<span class="classifier">iterable of iterable of (int, int)</span></dt><dd><p>Corpus in BoW format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="gdtm-wrappers-nlda-module">
+<h2>gdtm.wrappers.nlda module<a class="headerlink" href="#gdtm-wrappers-nlda-module" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="base_wrappers.html" class="btn btn-neutral float-left" title="Base Model Wrappers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="temporal_models.html" class="btn btn-neutral float-right" title="Temporal Model Wrappers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Rob Churchill.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Temporal Models &mdash; gdtm 1.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Semi-Supervised Models" href="semisupervised_models.html" />
+    <link rel="prev" title="Topic-Noise Models" href="topic_noise_models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> gdtm
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../gdtm.models.html">Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="topic_noise_models.html">Topic-Noise Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topic_noise_models.html#embedded-topic-noise-models">Embedded Topic-Noise Models</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Temporal Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-gdtm.models.dtnd">gdtm.models.dtnd module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gdtm.models.dnlda">gdtm.models.dnlda module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#embedded-temporal-models">Embedded Temporal Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-gdtm.models.detnd">gdtm.models.detnd module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gdtm.models.denlda">gdtm.models.denlda module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="semisupervised_models.html">Semi-Supervised Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postprocessing_methods.html">Post-Processing Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gdtm.models.html#module-gdtm.models">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gdtm.wrappers.html">Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gdtm.helpers.html">Helpers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gdtm</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../gdtm.models.html">Models</a> &raquo;</li>
+      <li>Temporal Models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/gdtm/models/temporal_models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="temporal-models">
+<h1>Temporal Models<a class="headerlink" href="#temporal-models" title="Permalink to this headline"></a></h1>
+<section id="module-gdtm.models.dtnd">
+<span id="gdtm-models-dtnd-module"></span><h2>gdtm.models.dtnd module<a class="headerlink" href="#module-gdtm.models.dtnd" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gdtm.models.dtnd.dTND">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gdtm.models.dtnd.</span></span><span class="sig-name descname"><span class="pre">dTND</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_words_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_word_distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mallet_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starting_alpha_array_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1824</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.models.dtnd.dTND" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="topic_noise_models.html#gdtm.models.tnd.TND" title="gdtm.models.tnd.TND"><code class="xref py py-class docutils literal notranslate"><span class="pre">gdtm.models.tnd.TND</span></code></a></p>
+<p>Dynamic Topic-Noise Discriminator (dTND).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – ordered list of sub-datasets,
+where dataset[i] is the data set for time period i</p></li>
+<li><p><strong>dataset</strong> – list of lists, required.</p></li>
+<li><p><strong>k</strong> – int, optional:
+Number of topics to compute in TND.</p></li>
+<li><p><strong>alpha</strong> – int, optional:
+Alpha parameter of TND.</p></li>
+<li><p><strong>beta0</strong> – float, optional:
+Beta_0 parameter of TND.</p></li>
+<li><p><strong>beta1</strong> – int, optional
+Beta_1 (skew) parameter of TND.</p></li>
+<li><p><strong>noise_words_max</strong> – int, optional:
+Number of noise words to save when saving the distribution to a file.
+The top <cite>noise_words_max</cite> most probable noise words will be saved.</p></li>
+<li><p><strong>save_path</strong> – filepath, optional:
+Path to save each time period’s topics and noise distributions to</p></li>
+<li><p><strong>starting_alpha_array_file</strong> – filepath, optional:
+Path of file containing initial alpha distributon.</p></li>
+<li><p><strong>iterations</strong> – int, optional:
+Number of training iterations for TND.</p></li>
+<li><p><strong>top_words</strong> – int, optional:
+Number of words per topic to return.</p></li>
+<li><p><strong>tw_dist</strong> – dict, optional:
+Pre-trained topic-word distribution.</p></li>
+<li><p><strong>noise_distribution</strong> – dict, optional:
+Pre-trained noise distribution.</p></li>
+<li><p><strong>corpus</strong> – Gensim object, optional:
+Formatted documents for use in model.  Automatically computed if not provided.</p></li>
+<li><p><strong>dictionary</strong> – Gensim object, optional:
+Formatted word mapping for use in model.  Automatically computed if not provided.</p></li>
+<li><p><strong>mallet_path</strong> – path to Mallet TND code, required:
+Path should be <cite>path/to/mallet-tnd/bin/mallet</cite>.</p></li>
+<li><p><strong>random_seed</strong> – int, optional:
+Seed for random-number generated processes.</p></li>
+<li><p><strong>run</strong> – bool, optional:
+If true, run model on initialization, provided data is provided.</p></li>
+<li><p><strong>workers</strong> – int, optional:
+Number of cores to use for computation of TND.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.models.dtnd.dTND.get_noise_distribution">
+<span class="sig-name descname"><span class="pre">get_noise_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_words_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.models.dtnd.dTND.get_noise_distribution" title="Permalink to this definition"></a></dt>
+<dd><p>takes self.tnd_noise_distribution and tnd_noise_words_max
+returns a list of (noise word, frequency) tuples ranked by frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> – time period</p></li>
+<li><p><strong>tnd_noise_words_max</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of (noise word, frequency) tuples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.models.dtnd.dTND.get_topics">
+<span class="sig-name descname"><span class="pre">get_topics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.models.dtnd.dTND.get_topics" title="Permalink to this definition"></a></dt>
+<dd><p>takes top_words and self.topics, returns a list of topic lists of length top_words</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> – time period</p></li>
+<li><p><strong>top_words</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of topic lists</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-gdtm.models.dnlda">
+<span id="gdtm-models-dnlda-module"></span><h2>gdtm.models.dnlda module<a class="headerlink" href="#module-gdtm.models.dnlda" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gdtm.models.dnlda.dNLDA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gdtm.models.dnlda.</span></span><span class="sig-name descname"><span class="pre">dNLDA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_beta0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_beta1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_noise_words_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_depth_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_time_periods</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_noise_distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_tw_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_topics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_tnd_alpha_array_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_tnd_noise_dist_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_tnd_tw_dist_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_lda_alpha_array_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_lda_tw_dist_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mallet_tnd_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mallet_lda_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1824</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.models.dnlda.dNLDA" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="topic_noise_models.html#gdtm.models.nlda.NLDA" title="gdtm.models.nlda.NLDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">gdtm.models.nlda.NLDA</span></code></a></p>
+<p>Dynamic Noiseless Latent Dirichlet Allocation (dNLDA).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – list of lists, required.</p></li>
+<li><p><strong>tnd_k</strong> – int, optional:
+Number of topics to compute in d-TND.</p></li>
+<li><p><strong>tnd_alpha</strong> – int, optional:
+Alpha parameter of d-TND.</p></li>
+<li><p><strong>tnd_beta0</strong> – float, optional:
+Beta_0 parameter of d-TND.</p></li>
+<li><p><strong>tnd_beta1</strong> – int, optional
+Beta_1 (skew) parameter of d-TND.</p></li>
+<li><p><strong>tnd_noise_words_max</strong> – int, optional:
+Number of noise words to save when saving the distribution to a file.
+The top <cite>noise_words_max</cite> most probable noise words will be saved.</p></li>
+<li><p><strong>tnd_iterations</strong> – int, optional:
+Number of training iterations for d-TND.</p></li>
+<li><p><strong>lda_iterations</strong> – int, optional:
+Number of training iterations for d-LDA.</p></li>
+<li><p><strong>lda_k</strong> – int, optional:
+Number of topics to compute in d-LDA.</p></li>
+<li><p><strong>lda_beta</strong> – float, optional:
+Initial Beta parameter for d-LDA.</p></li>
+<li><p><strong>phi</strong> – int, optional:
+Topic weighting for noise filtering step.</p></li>
+<li><p><strong>topic_depth</strong> – int, optional:
+Number of most probable words per topic to consider for replacement in noise filtering step.</p></li>
+<li><p><strong>top_words</strong> – int, optional:
+Number of words per topic to return.</p></li>
+<li><p><strong>phi_list</strong> – list, optional:
+List of phi parameters to test on.</p></li>
+<li><p><strong>topic_depth_list</strong> – list, optional:
+List of topic_depth parameters to test on.</p></li>
+<li><p><strong>num_time_periods</strong> – int, optional:
+Number of time periods in the data set.
+Should be equal to the length of the data set parameter.</p></li>
+<li><p><strong>tnd_noise_distribution</strong> – dict, optional:
+Pre-trained noise distribution</p></li>
+<li><p><strong>lda_tw_dist</strong> – dict, optional:
+Pre-trained topic-word distribution.</p></li>
+<li><p><strong>lda_topics</strong> – list of lists, optional:
+Pre-computed d-LDA topics.</p></li>
+<li><p><strong>corpus</strong> – Gensim object, optional:
+Formatted documents for use in model.  Automatically computed if not provided.</p></li>
+<li><p><strong>dictionary</strong> – Gensim object, optional:
+Formatted word mapping for use in model.  Automatically computed if not provided.</p></li>
+<li><p><strong>last_tnd_alpha_array_file</strong> – filepath, optional:
+Path to file containing previous time period’s d-TND alpha array.</p></li>
+<li><p><strong>last_tnd_noise_dist_file</strong> – filepath, optional:
+Path to file containing previous time period’s noise distribution.</p></li>
+<li><p><strong>last_tnd_tw_dist_file</strong> – filepath, optional:
+Path to file containing previous time period’s d-TND topic-word distribution.</p></li>
+<li><p><strong>last_lda_alpha_array_file</strong> – filepath, optional:
+Path to file containing previous time period’s d-LDA alpha array.</p></li>
+<li><p><strong>last_lda_tw_dist_file</strong> – filepath, optional:
+Path to file containing previous time period’s d-LDA topic-word distribution.</p></li>
+<li><p><strong>lda_save_path</strong> – filepath, optional:
+Path to save d-LDA topics for each time period. Each time period is saved in a separate file in this directory.</p></li>
+<li><p><strong>save_path</strong> – filepath, optional:
+Path to save DNLDA topics for each time period. Each time period is saved in a separate file in this directory.</p></li>
+<li><p><strong>mallet_tnd_path</strong> – path to Mallet d-TND code, required:
+Path should be <cite>path/to/mallet-dtnd/bin/mallet</cite>.</p></li>
+<li><p><strong>mallet_lda_path</strong> – path to Mallet d-LDA code, required:
+Path should be <cite>path/to/mallet-dlda/bin/mallet</cite>.</p></li>
+<li><p><strong>random_seed</strong> – int, optional:
+Seed for random-number generated processes.</p></li>
+<li><p><strong>run</strong> – bool, optional:
+If true, run model on initialization, if data is provided.</p></li>
+<li><p><strong>tnd_workers</strong> – int, optional:
+Number of cores to use for computation of d-TND.</p></li>
+<li><p><strong>lda_workers</strong> – int, optional:
+Number of cores to use for computation of d-LDA.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.models.dnlda.dNLDA.get_noise_distribution">
+<span class="sig-name descname"><span class="pre">get_noise_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_noise_words_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.models.dnlda.dNLDA.get_noise_distribution" title="Permalink to this definition"></a></dt>
+<dd><p>takes self.tnd_noise_distribution and tnd_noise_words_max
+returns a list of (noise word, frequency) tuples ranked by frequency
+:param t: time period
+:param tnd_noise_words_max:
+:return: list of (noise word, frequency) tuples</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gdtm.models.dnlda.dNLDA.get_topics">
+<span class="sig-name descname"><span class="pre">get_topics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.models.dnlda.dNLDA.get_topics" title="Permalink to this definition"></a></dt>
+<dd><p>takes top_words and self.topics, returns a list of topic lists of length top_words
+:param t: time period
+:param top_words:
+:return: list of topic lists</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="embedded-temporal-models">
+<h1>Embedded Temporal Models<a class="headerlink" href="#embedded-temporal-models" title="Permalink to this headline"></a></h1>
+<section id="module-gdtm.models.detnd">
+<span id="gdtm-models-detnd-module"></span><h2>gdtm.models.detnd module<a class="headerlink" href="#module-gdtm.models.detnd" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gdtm.models.detnd.deTND">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gdtm.models.detnd.</span></span><span class="sig-name descname"><span class="pre">deTND</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_words_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tw_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mallet_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starting_alpha_array_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closest_x_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1824</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.models.detnd.deTND" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gdtm.models.dtnd.dTND" title="gdtm.models.dtnd.dTND"><code class="xref py py-class docutils literal notranslate"><span class="pre">gdtm.models.dtnd.dTND</span></code></a></p>
+<p>Dynamic Embedded Topic-Noise Discriminator (deTND).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – ordered list of sub-datasets,
+where dataset[i] is the data set for time period i</p></li>
+<li><p><strong>dataset</strong> – list of lists, required.</p></li>
+<li><p><strong>k</strong> – int, optional:
+Number of topics to compute in TND.</p></li>
+<li><p><strong>alpha</strong> – int, optional:
+Alpha parameter of TND.</p></li>
+<li><p><strong>beta0</strong> – float, optional:
+Beta_0 parameter of TND.</p></li>
+<li><p><strong>beta1</strong> – int, optional
+Beta_1 (skew) parameter of TND.</p></li>
+<li><p><strong>noise_words_max</strong> – int, optional:
+Number of noise words to save when saving the distribution to a file.
+The top <cite>noise_words_max</cite> most probable noise words will be saved.</p></li>
+<li><p><strong>save_path</strong> – filepath, optional:
+Path to save each time period’s topics and noise distributions to</p></li>
+<li><p><strong>starting_alpha_array_file</strong> – filepath, optional:
+Path of file containing initial alpha distributon.</p></li>
+<li><p><strong>embedding_path</strong> – filepath, required:
+Path to trained word embedding vectors.</p></li>
+<li><p><strong>closest_x_words</strong> – int, optional:
+The number of words to sample from the word embedding space each time a word is determined to be a noise word.</p></li>
+<li><p><strong>iterations</strong> – int, optional:
+Number of training iterations for TND.</p></li>
+<li><p><strong>top_words</strong> – int, optional:
+Number of words per topic to return.</p></li>
+<li><p><strong>tw_dist</strong> – dict, optional:
+Pre-trained topic-word distribution.</p></li>
+<li><p><strong>noise_distribution</strong> – dict, optional:
+Pre-trained noise distribution.</p></li>
+<li><p><strong>corpus</strong> – Gensim object, optional:
+Formatted documents for use in model.  Automatically computed if not provided.</p></li>
+<li><p><strong>dictionary</strong> – Gensim object, optional:
+Formatted word mapping for use in model.  Automatically computed if not provided.</p></li>
+<li><p><strong>mallet_path</strong> – path to Mallet TND code, required:
+Path should be <cite>path/to/mallet-tnd/bin/mallet</cite>.</p></li>
+<li><p><strong>random_seed</strong> – int, optional:
+Seed for random-number generated processes.</p></li>
+<li><p><strong>run</strong> – bool, optional:
+If true, run model on initialization, provided data is provided.</p></li>
+<li><p><strong>workers</strong> – int, optional:
+Number of cores to use for computation of TND.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-gdtm.models.denlda">
+<span id="gdtm-models-denlda-module"></span><h2>gdtm.models.denlda module<a class="headerlink" href="#module-gdtm.models.denlda" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gdtm.models.denlda.deNLDA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gdtm.models.denlda.</span></span><span class="sig-name descname"><span class="pre">deNLDA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_beta0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_beta1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_noise_words_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_depth_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_time_periods</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_noise_distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_tw_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_topics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_tnd_alpha_array_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_tnd_noise_dist_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_tnd_tw_dist_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_lda_alpha_array_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_lda_tw_dist_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mallet_tnd_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mallet_lda_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closest_x_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1824</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tnd_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.models.denlda.deNLDA" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gdtm.models.dnlda.dNLDA" title="gdtm.models.dnlda.dNLDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">gdtm.models.dnlda.dNLDA</span></code></a></p>
+<p>Dynamic Embedded Noiseless Latent Dirichlet Allocation (deNLDA).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – list of lists, required.</p></li>
+<li><p><strong>tnd_k</strong> – int, optional:
+Number of topics to compute in TND.</p></li>
+<li><p><strong>tnd_alpha</strong> – int, optional:
+Alpha parameter of TND.</p></li>
+<li><p><strong>tnd_beta0</strong> – float, optional:
+Beta_0 parameter of TND.</p></li>
+<li><p><strong>tnd_beta1</strong> – int, optional
+Beta_1 (skew) parameter of TND.</p></li>
+<li><p><strong>tnd_noise_words_max</strong> – int, optional:
+Number of noise words to save when saving the distribution to a file.
+The top <cite>noise_words_max</cite> most probable noise words will be saved.</p></li>
+<li><p><strong>tnd_iterations</strong> – int, optional:
+Number of training iterations for TND.</p></li>
+<li><p><strong>lda_iterations</strong> – int, optional:
+Number of training iterations for LDA.</p></li>
+<li><p><strong>lda_k</strong> – int, optional:
+Number of topics to compute in LDA.</p></li>
+<li><p><strong>lda_beta</strong> – float, optional:
+Initial Beta parameter for d-LDA.</p></li>
+<li><p><strong>phi</strong> – int, optional:
+Topic weighting for noise filtering step.</p></li>
+<li><p><strong>topic_depth</strong> – int, optional:
+Number of most probable words per topic to consider for replacement in noise filtering step.</p></li>
+<li><p><strong>top_words</strong> – int, optional:
+Number of words per topic to return.</p></li>
+<li><p><strong>phi_list</strong> – list, optional:
+List of phi parameters to test on.</p></li>
+<li><p><strong>topic_depth_list</strong> – list, optional:
+List of topic_depth parameters to test on.</p></li>
+<li><p><strong>num_time_periods</strong> – int, optional:
+Number of time periods in the data set.
+Should be equal to the length of the data set parameter.</p></li>
+<li><p><strong>embedding_path</strong> – filepath, required:
+Path to trained word embedding vectors.</p></li>
+<li><p><strong>closest_x_words</strong> – int, optional:
+The number of words to sample from the word embedding space each time a word is determined to be a noise word.</p></li>
+<li><p><strong>tnd_noise_distribution</strong> – dict, optional:
+Pre-trained noise distribution</p></li>
+<li><p><strong>lda_tw_dist</strong> – dict, optional:
+Pre-trained topic-word distribution.</p></li>
+<li><p><strong>lda_topics</strong> – list of lists, optional:
+Pre-computed LDA topics.</p></li>
+<li><p><strong>corpus</strong> – Gensim object, optional:
+Formatted documents for use in model.  Automatically computed if not provided.</p></li>
+<li><p><strong>dictionary</strong> – Gensim object, optional:
+Formatted word mapping for use in model.  Automatically computed if not provided.</p></li>
+<li><p><strong>last_tnd_alpha_array_file</strong> – filepath, optional:
+Path to file containing previous time period’s d-TND alpha array.</p></li>
+<li><p><strong>last_tnd_noise_dist_file</strong> – filepath, optional:
+Path to file containing previous time period’s noise distribution.</p></li>
+<li><p><strong>last_tnd_tw_dist_file</strong> – filepath, optional:
+Path to file containing previous time period’s d-TND topic-word distribution.</p></li>
+<li><p><strong>last_lda_alpha_array_file</strong> – filepath, optional:
+Path to file containing previous time period’s d-LDA alpha array.</p></li>
+<li><p><strong>last_lda_tw_dist_file</strong> – filepath, optional:
+Path to file containing previous time period’s d-LDA topic-word distribution.</p></li>
+<li><p><strong>lda_save_path</strong> – filepath, optional:
+Path to save d-LDA topics for each time period. Each time period is saved in a separate file in this directory.</p></li>
+<li><p><strong>save_path</strong> – filepath, optional:
+Path to save DNLDA topics for each time period. Each time period is saved in a separate file in this directory.</p></li>
+<li><p><strong>mallet_tnd_path</strong> – path to Mallet TND code, required:
+Path should be <cite>path/to/mallet-tnd/bin/mallet</cite>.</p></li>
+<li><p><strong>mallet_lda_path</strong> – path to Mallet LDA code, required:
+Path should be <cite>path/to/mallet-lda/bin/mallet</cite>.</p></li>
+<li><p><strong>random_seed</strong> – int, optional:
+Seed for random-number generated processes.</p></li>
+<li><p><strong>run</strong> – bool, optional:
+If true, run model on initialization, if data is provided.</p></li>
+<li><p><strong>tnd_workers</strong> – int, optional:
+Number of cores to use for computation of TND.</p></li>
+<li><p><strong>lda_workers</strong> – int, optional:
+Number of cores to use for computation of LDA.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="topic_noise_models.html" class="btn btn-neutral float-left" title="Topic-Noise Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="semisupervised_models.html" class="btn btn-neutral float-right" title="Semi-Supervised Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Rob Churchill.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

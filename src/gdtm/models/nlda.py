@@ -1,4 +1,3 @@
-#!/home/rob/.env/topics/bin/python
 import math
 import random
 from gensim import corpora
@@ -7,13 +6,67 @@ from ..wrappers import LDAMallet, TNDMallet
 
 
 class NLDA:
-    topics = None
+    '''
+    Noiseless Latent Dirichlet Allocation (NLDA).
+    An ensemble topic-noise model consisting of the noise distribution from
+    TND and the topic-word distribution from LDA.
+    Input the raw data and compute the whole model, or input pre-computed distributions
+    for faster inference.
+
+    :param dataset: list of lists, required.
+    :param tnd_k: int, optional:
+        Number of topics to compute in TND.
+    :param tnd_alpha: int, optional:
+            Alpha parameter of TND.
+    :param tnd_beta0: float, optional:
+            Beta_0 parameter of TND.
+    :param tnd_beta1: int, optional
+            Beta_1 (skew) parameter of TND.
+    :param tnd_noise_words_max: int, optional:
+            Number of noise words to save when saving the distribution to a file.
+            The top `noise_words_max` most probable noise words will be saved.
+    :param tnd_iterations: int, optional:
+            Number of training iterations for TND.
+    :param lda_iterations: int, optional:
+            Number of training iterations for LDA.
+    :param lda_k: int, optional:
+        Number of topics to compute in LDA.
+    :param phi: int, optional:
+        Topic weighting for noise filtering step.
+    :param topic_depth: int, optional:
+        Number of most probable words per topic to consider for replacement in noise filtering step.
+    :param top_words: int, optional:
+        Number of words per topic to return.
+    :param tnd_noise_distribution: dict, optional:
+        Pre-trained noise distribution
+    :param lda_tw_dist: dict, optional:
+        Pre-trained topic-word distribution.
+    :param lda_topics: list of lists, optional:
+        Pre-computed LDA topics.
+    :param corpus: Gensim object, optional:
+        Formatted documents for use in model.  Automatically computed if not provided.
+    :param dictionary: Gensim object, optional:
+        Formatted word mapping for use in model.  Automatically computed if not provided.
+    :param mallet_tnd_path: path to Mallet TND code, required:
+        Path should be `path/to/mallet-tnd/bin/mallet`.
+    :param mallet_lda_path: path to Mallet LDA code, required:
+        Path should be `path/to/mallet-lda/bin/mallet`.
+    :param random_seed: int, optional:
+        Seed for random-number generated processes.
+    :param run: bool, optional:
+        If true, run model on initialization, if data is provided.
+    :param tnd_workers: int, optional:
+        Number of cores to use for computation of TND.
+    :param lda_workers: int, optional:
+        Number of cores to use for computation of LDA.
+    '''
 
     def __init__(self, dataset=None, tnd_k=30, tnd_alpha=50, tnd_beta0=0.01, tnd_beta1=25, tnd_noise_words_max=200,
-                 tnd_iterations=1000, lda_iterations=1000, lda_k=30, nlda_phi=10, nlda_topic_depth=100, top_words=20,
+                 tnd_iterations=1000, lda_iterations=1000, lda_k=30, phi=10, topic_depth=100, top_words=20,
                  tnd_noise_distribution=None, lda_tw_dist=None, lda_topics=None, corpus=None, dictionary=None,
-                 save_path=None, mallet_tnd_path=None, mallet_lda_path=None, random_seed=1824, run=True,
+                 mallet_tnd_path=None, mallet_lda_path=None, random_seed=1824, run=True,
                  tnd_workers=4, lda_workers=4):
+        self.topics = []
         self.dataset = dataset
         self.tnd_k = tnd_k
         self.tnd_alpha = tnd_alpha
@@ -23,18 +76,14 @@ class NLDA:
         self.tnd_iterations = tnd_iterations
         self.lda_iterations = lda_iterations
         self.lda_k = lda_k
-        self.nlda_phi = nlda_phi
-        self.nlda_topic_depth = nlda_topic_depth
+        self.nlda_phi = phi
+        self.nlda_topic_depth = topic_depth
         self.top_words = top_words
         self.tnd_noise_distribution = tnd_noise_distribution
         self.lda_tw_dist = lda_tw_dist
         self.lda_topics = lda_topics
         self.corpus = corpus
         self.dictionary = dictionary
-        if save_path is not None:
-            self.save_path = save_path
-        else:
-            self.save_path = 'nlda_results/'
         self.mallet_tnd_path = mallet_tnd_path
         self.mallet_lda_path = mallet_lda_path
         self.random_seed = random_seed
@@ -52,15 +101,15 @@ class NLDA:
 
         if run:
             if (self.dataset is not None) and (self.corpus is None or self.dictionary is None):
-                self.prepare_data()
+                self._prepare_data()
             if self.tnd_noise_distribution is None:
-                self.compute_tnd()
+                self._compute_tnd()
             if self.lda_tw_dist is None:
-                self.compute_lda()
+                self._compute_lda()
 
-            self.compute_nlda()
+            self._compute_nlda()
 
-    def prepare_data(self):
+    def _prepare_data(self):
         """
         takes dataset, sets self.dictionary and self.corpus for use in Mallet models and NLDA
         :return: void
@@ -71,7 +120,7 @@ class NLDA:
         self.dictionary = dictionary
         self.corpus = corpus
 
-    def compute_tnd(self):
+    def _compute_tnd(self):
         """
         takes dataset, tnd parameters, tnd mallet path, and computes tnd model on dataset
         sets self.tnd_noise_distribution to the noise distribution computed in tnd
@@ -85,7 +134,7 @@ class NLDA:
         noise = model.load_noise_dist()
         self.tnd_noise_distribution = noise
 
-    def compute_lda(self):
+    def _compute_lda(self):
         """
         takes dataset, lda parameters, lda mallet path, and computes LDA model on dataset
         sets self.lda_tw_dist to the topic word distribution computed in LDA
@@ -98,7 +147,7 @@ class NLDA:
         topics = model.show_topics(num_topics=self.lda_k, num_words=self.nlda_topic_depth, formatted=False)
         self.lda_topics = [[w for (w, _) in topics[i][1]] for i in range(0, len(topics))]
 
-    def compute_nlda(self):
+    def _compute_nlda(self):
         """
         takes self.tnd_noise_distribution, self.lda_tw_dist, self.phi, self.top_words, and computes NLDA topics
         sets self.topics to the set of topics computed from noise distribution and topic word distribution

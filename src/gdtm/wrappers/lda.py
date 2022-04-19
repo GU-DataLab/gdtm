@@ -47,11 +47,6 @@ class LDAMallet(BaseMalletWrapper):
     This is **only** python wrapper for `MALLET LDA <http://mallet.cs.umass.edu/>`,
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
-    """
-    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, id2word=None, workers=4, prefix=None,
-                 optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0):
-        """
-
         Parameters
         ----------
         mallet_path : str
@@ -78,8 +73,10 @@ class LDAMallet(BaseMalletWrapper):
         random_seed: int, optional
             Random seed to ensure consistent results, if 0 - use system clock.
 
-        """
-        super().__init__(mallet_path, corpus=corpus, num_topics=num_topics, alpha=alpha, beta=beta, id2word=id2word,
+    """
+    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, id2word=None, workers=4,
+                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0):
+        super().__init__(mallet_path, corpus=corpus, num_topics=num_topics, alpha=alpha, id2word=id2word,
                          workers=workers, prefix=prefix, optimize_interval=optimize_interval, iterations=iterations,
                          topic_threshold=topic_threshold, random_seed=random_seed)
         if corpus is not None:

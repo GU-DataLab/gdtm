@@ -63,22 +63,18 @@ class dLDAMallet(BaseMalletWrapper):
     This is **only** python wrapper for `MALLET LDA <http://mallet.cs.umass.edu/>`_,
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
-    """
-    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
-                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
-                 alpha_array_infile=None, tw_dist_file=None):
-        """
-
         Parameters
         ----------
         mallet_path : str
-            Path to the mallet binary, e.g. `/home/username/mallet-2.0.7/bin/mallet`.
+            Path to the mallet binary, e.g. `/home/username/mallet-dlda/bin/mallet`.
         corpus : iterable of iterable of (int, int), optional
             Collection of texts in BoW format.
         num_topics : int, optional
             Number of topics.
         alpha : int, optional
-            Alpha parameter of LDA.
+            Initial Alpha parameter of d-LDA.
+        beta: float, optional
+            Initial Beta parameter of d-LDA.
         id2word : :class:`~gensim.corpora.dictionary.Dictionary`, optional
             Mapping between tokens ids and words from corpus, if not specified - will be inferred from `corpus`.
         workers : int, optional
@@ -99,7 +95,10 @@ class dLDAMallet(BaseMalletWrapper):
         tw_dist_file: str, optional
             path to file containing topic-word distribution from previous time period
 
-        """
+    """
+    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
+                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
+                 alpha_array_infile=None, tw_dist_file=None):
         super().__init__(mallet_path, corpus=corpus, num_topics=num_topics, alpha=alpha, beta=beta, id2word=id2word,
                          workers=workers, prefix=prefix, optimize_interval=optimize_interval, iterations=iterations,
                          topic_threshold=topic_threshold, random_seed=random_seed)

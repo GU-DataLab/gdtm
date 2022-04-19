@@ -1,4 +1,3 @@
-#!/home/rob/.env/topics/bin/python
 import math
 import random
 from gensim import corpora
@@ -9,23 +8,94 @@ from .nlda import NLDA
 
 
 class dNLDA(NLDA):
-    topics = []
+    '''
+    Dynamic Noiseless Latent Dirichlet Allocation (dNLDA).
+
+    :param dataset: list of lists, required.
+    :param tnd_k: int, optional:
+        Number of topics to compute in d-TND.
+    :param tnd_alpha: int, optional:
+            Alpha parameter of d-TND.
+    :param tnd_beta0: float, optional:
+            Beta_0 parameter of d-TND.
+    :param tnd_beta1: int, optional
+            Beta_1 (skew) parameter of d-TND.
+    :param tnd_noise_words_max: int, optional:
+            Number of noise words to save when saving the distribution to a file.
+            The top `noise_words_max` most probable noise words will be saved.
+    :param tnd_iterations: int, optional:
+            Number of training iterations for d-TND.
+    :param lda_iterations: int, optional:
+            Number of training iterations for d-LDA.
+    :param lda_k: int, optional:
+        Number of topics to compute in d-LDA.
+    :param lda_beta: float, optional:
+        Initial Beta parameter for d-LDA.
+    :param phi: int, optional:
+        Topic weighting for noise filtering step.
+    :param topic_depth: int, optional:
+        Number of most probable words per topic to consider for replacement in noise filtering step.
+    :param top_words: int, optional:
+        Number of words per topic to return.
+    :param phi_list: list, optional:
+        List of phi parameters to test on.
+    :param topic_depth_list: list, optional:
+        List of topic_depth parameters to test on.
+    :param num_time_periods: int, optional:
+        Number of time periods in the data set.
+        Should be equal to the length of the data set parameter.
+    :param tnd_noise_distribution: dict, optional:
+        Pre-trained noise distribution
+    :param lda_tw_dist: dict, optional:
+        Pre-trained topic-word distribution.
+    :param lda_topics: list of lists, optional:
+        Pre-computed d-LDA topics.
+    :param corpus: Gensim object, optional:
+        Formatted documents for use in model.  Automatically computed if not provided.
+    :param dictionary: Gensim object, optional:
+        Formatted word mapping for use in model.  Automatically computed if not provided.
+    :param last_tnd_alpha_array_file: filepath, optional:
+        Path to file containing previous time period's d-TND alpha array.
+    :param last_tnd_noise_dist_file: filepath, optional:
+        Path to file containing previous time period's noise distribution.
+    :param last_tnd_tw_dist_file: filepath, optional:
+        Path to file containing previous time period's d-TND topic-word distribution.
+    :param last_lda_alpha_array_file: filepath, optional:
+        Path to file containing previous time period's d-LDA alpha array.
+    :param last_lda_tw_dist_file: filepath, optional:
+        Path to file containing previous time period's d-LDA topic-word distribution.
+    :param lda_save_path: filepath, optional:
+        Path to save d-LDA topics for each time period. Each time period is saved in a separate file in this directory.
+    :param save_path: filepath, optional:
+        Path to save DNLDA topics for each time period. Each time period is saved in a separate file in this directory.
+    :param mallet_tnd_path: path to Mallet d-TND code, required:
+        Path should be `path/to/mallet-dtnd/bin/mallet`.
+    :param mallet_lda_path: path to Mallet d-LDA code, required:
+        Path should be `path/to/mallet-dlda/bin/mallet`.
+    :param random_seed: int, optional:
+        Seed for random-number generated processes.
+    :param run: bool, optional:
+        If true, run model on initialization, if data is provided.
+    :param tnd_workers: int, optional:
+        Number of cores to use for computation of d-TND.
+    :param lda_workers: int, optional:
+        Number of cores to use for computation of d-LDA.
+    '''
 
     def __init__(self, dataset=None, tnd_k=30, tnd_alpha=50, tnd_beta0=0.01, tnd_beta1=25, tnd_noise_words_max=200,
-                 tnd_iterations=1000, lda_iterations=1000, lda_k=30, lda_beta=0.01, nlda_phi=10,
-                 nlda_topic_depth=100, top_words=20, nlda_phi_list=None, nlda_topic_depth_list=None,
+                 tnd_iterations=1000, lda_iterations=1000, lda_k=30, lda_beta=0.01, phi=10,
+                 topic_depth=100, top_words=20, phi_list=None, topic_depth_list=None,
                  num_time_periods=10, tnd_noise_distribution=[], lda_tw_dist=[], lda_topics=[], corpus=None,
                  dictionary=None, last_tnd_alpha_array_file=None, last_tnd_noise_dist_file=None,
                  last_tnd_tw_dist_file=None, last_lda_alpha_array_file=None, last_lda_tw_dist_file=None,
                  lda_save_path=None, save_path=None, mallet_tnd_path=None, mallet_lda_path=None, random_seed=1824,
                  tnd_workers=4, lda_workers=4, run=True):
-
         super().__init__(dataset=dataset, tnd_k=tnd_k, tnd_alpha=tnd_alpha, tnd_beta0=tnd_beta0, tnd_beta1=tnd_beta1,
                          tnd_noise_words_max=tnd_noise_words_max, tnd_iterations=tnd_iterations,
-                         lda_iterations=lda_iterations, lda_k=lda_k, nlda_phi=nlda_phi,
-                         nlda_topic_depth=nlda_topic_depth, top_words=top_words,
+                         lda_iterations=lda_iterations, lda_k=lda_k, phi=phi,
+                         topic_depth=topic_depth, top_words=top_words,
                          tnd_noise_distribution=tnd_noise_distribution, lda_tw_dist=lda_tw_dist, lda_topics=lda_topics,
-                         corpus=corpus, dictionary=dictionary, save_path=save_path, mallet_tnd_path=mallet_tnd_path,
+                         corpus=corpus, dictionary=dictionary, mallet_tnd_path=mallet_tnd_path,
                          mallet_lda_path=mallet_lda_path, random_seed=random_seed, run=False, tnd_workers=tnd_workers,
                          lda_workers=lda_workers)
         if save_path is not None:
@@ -42,8 +112,8 @@ class dNLDA(NLDA):
         self.last_tnd_tw_dist_file = last_tnd_tw_dist_file
         self.last_tnd_noise_dist_file = last_tnd_noise_dist_file
         self.lda_save_path = lda_save_path
-        self.nlda_phi_list = nlda_phi_list
-        self.nlda_topic_depth_list = nlda_topic_depth_list
+        self.nlda_phi_list = phi_list
+        self.nlda_topic_depth_list = topic_depth_list
 
         self.num_time_periods = num_time_periods
         if self.dataset is not None:
@@ -54,9 +124,9 @@ class dNLDA(NLDA):
             raise MissingDataSetError
 
         if run:
-            self.run_nlda_all_time_periods(save=save)
+            self._run_nlda_all_time_periods(save=save)
 
-    def prepare_data(self, t):
+    def _prepare_data(self, t):
         """
         takes dataset, sets self.dictionary and self.corpus for use in Mallet models and NLDA
         :return: void
@@ -67,7 +137,7 @@ class dNLDA(NLDA):
         self.dictionary = dictionary
         self.corpus = corpus
 
-    def compute_nlda(self, noise_dist, tw_dist, lda_topics, phi, depth):
+    def _compute_nlda(self, noise_dist, tw_dist, lda_topics, phi, depth):
         """
         takes self.tnd_noise_distribution, self.lda_tw_dist, self.phi, self.top_words, and computes NLDA topics
         sets self.topics to the set of topics computed from noise distribution and topic word distribution
@@ -96,7 +166,7 @@ class dNLDA(NLDA):
             topics.append(final_topic)
         return topics
 
-    def test_all_phi_and_depths(self, tw_dist, noise_dist, lda_topics):
+    def _test_all_phi_and_depths(self, tw_dist, noise_dist, lda_topics):
         phi = self.nlda_phi
         depth = self.nlda_topic_depth
         phi_depth_combos = []
@@ -119,13 +189,13 @@ class dNLDA(NLDA):
 
         topic_sets = []
         for phi, depth in phi_depth_combos:
-            topics = self.compute_nlda(noise_dist=noise_dist, tw_dist=tw_dist, lda_topics=lda_topics, phi=phi,
+            topics = self._compute_nlda(noise_dist=noise_dist, tw_dist=tw_dist, lda_topics=lda_topics, phi=phi,
                                        depth=depth)
             topic_sets.append((phi, depth, topics))
         return topic_sets
 
-    def run_nlda_one_time_period(self, t):
-        self.prepare_data(t)
+    def _run_nlda_one_time_period(self, t):
+        self._prepare_data(t)
         if len(self.tnd_noise_distribution) > t:
             noise_dist = self.tnd_noise_distribution[t]
         else:
@@ -162,13 +232,13 @@ class dNLDA(NLDA):
             self.last_lda_alpha_array_file = lda_model.falphaarrayfile()
             self.last_lda_tw_dist_file = lda_model.fwordweights()
 
-        topic_sets = self.test_all_phi_and_depths(tw_dist, noise_dist, lda_topics)
+        topic_sets = self._test_all_phi_and_depths(tw_dist, noise_dist, lda_topics)
         return topic_sets, noise_dist
 
 
-    def run_nlda_all_time_periods(self, save=True):
+    def _run_nlda_all_time_periods(self, save=True):
         for t in range(0, len(self.dataset)):
-            topic_sets, noise_dist = self.run_nlda_one_time_period(t)
+            topic_sets, noise_dist = self._run_nlda_one_time_period(t)
             self.topics.append(topic_sets[0])
             if save:
                 for phi, depth, topics in topic_sets:

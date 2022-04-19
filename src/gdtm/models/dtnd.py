@@ -1,4 +1,3 @@
-#!/home/rob/.env/topics/bin/python
 from gensim import corpora
 from ..helpers.common import save_topics, save_noise_dist
 from ..wrappers import dTNDMallet
@@ -6,45 +5,66 @@ from .tnd import TND
 
 
 class dTND(TND):
-    topics = None
-    last_alpha_array_file = None
-    last_beta = None
-    last_noise_dist_file = None
-    last_tw_dist_file = None
-    noise_distribution = []
+    '''
+    Dynamic Topic-Noise Discriminator (dTND).
+
+    :param dataset: ordered list of sub-datasets,
+        where dataset[i] is the data set for time period i
+    :param dataset: list of lists, required.
+    :param k: int, optional:
+        Number of topics to compute in TND.
+    :param alpha: int, optional:
+            Alpha parameter of TND.
+    :param beta0: float, optional:
+            Beta_0 parameter of TND.
+    :param beta1: int, optional
+            Beta_1 (skew) parameter of TND.
+    :param noise_words_max: int, optional:
+            Number of noise words to save when saving the distribution to a file.
+            The top `noise_words_max` most probable noise words will be saved.
+    :param save_path: filepath, optional:
+        Path to save each time period's topics and noise distributions to
+    :param starting_alpha_array_file: filepath, optional:
+        Path of file containing initial alpha distributon.
+    :param iterations: int, optional:
+            Number of training iterations for TND.
+    :param top_words: int, optional:
+        Number of words per topic to return.
+    :param tw_dist: dict, optional:
+        Pre-trained topic-word distribution.
+    :param noise_distribution: dict, optional:
+        Pre-trained noise distribution.
+    :param corpus: Gensim object, optional:
+        Formatted documents for use in model.  Automatically computed if not provided.
+    :param dictionary: Gensim object, optional:
+        Formatted word mapping for use in model.  Automatically computed if not provided.
+    :param mallet_path: path to Mallet TND code, required:
+        Path should be `path/to/mallet-tnd/bin/mallet`.
+    :param random_seed: int, optional:
+        Seed for random-number generated processes.
+    :param run: bool, optional:
+        If true, run model on initialization, provided data is provided.
+    :param workers: int, optional:
+        Number of cores to use for computation of TND.
+    '''
 
     def __init__(self, dataset=None, k=30, alpha=50, beta0=0.01, beta1=25, noise_words_max=200,
                  iterations=1000, top_words=20, topic_word_distribution=None, corpus=None, dictionary=None,
                  save_path=None, mallet_path=None, starting_alpha_array_file=None, random_seed=1824, run=True,
                  noise_distribution=None, workers=4):
-        '''
-
-        :param dataset: dataset should be an ordered list of sub-datasets,
-                        where dataset[i] is the data set for time period i
-        :param k:
-        :param alpha:
-        :param beta0:
-        :param beta1:
-        :param noise_words_max:
-        :param iterations:
-        :param top_words:
-        :param noise_distribution:
-        :param tw_dist:
-        :param corpus:
-        :param dictionary:
-        :param save_path:
-        :param mallet_tnd_path:
-        :param starting_beta_file:
-        :param starting_alpha_array_file:
-        :param random_seed:
-        :param run:
-        '''
-
         super().__init__(dataset=dataset, k=k, alpha=alpha, beta0=beta0, beta1=beta1, noise_words_max=noise_words_max,
                          iterations=iterations, top_words=top_words, topic_word_distribution=topic_word_distribution,
                          noise_distribution=noise_distribution, corpus=corpus, dictionary=dictionary,
-                         save_path=save_path, mallet_path=mallet_path, random_seed=random_seed, run=False,
+                         mallet_path=mallet_path, random_seed=random_seed, run=False,
                          workers=workers)
+        self.topics = None
+        self.last_alpha_array_file = None
+        self.last_beta = None
+        self.last_noise_dist_file = None
+        self.last_tw_dist_file = None
+        if noise_distribution is None:
+            self.noise_distribution = []
+
         if save_path is not None:
             save = True
             self.save_path = save_path
@@ -55,9 +75,9 @@ class dTND(TND):
         self.last_alpha_array_file = starting_alpha_array_file
 
         if run:
-            self.run_all_time_periods(save=save)
+            self._run_all_time_periods(save=save)
 
-    def prepare_data(self, t):
+    def _prepare_data(self, t):
         """
         takes dataset, sets self.dictionary and self.corpus for use in Mallet models and NLDA
         :return: void
@@ -68,10 +88,10 @@ class dTND(TND):
         self.dictionary = dictionary
         self.corpus = corpus
 
-    def run_one_time_period(self, t):
+    def _run_one_time_period(self, t):
         # pass previous noise and tw distribution files into mallet
         # prepare data for time period t
-        self.prepare_data(t)
+        self._prepare_data(t)
         # run model
         model = dTNDMallet(self.mallet_path, corpus=self.corpus, num_topics=self.k, beta=self.last_beta,
                            id2word=self.dictionary, iterations=self.iterations, skew=self.beta1,
@@ -85,9 +105,9 @@ class dTND(TND):
         self.last_tw_dist_file = model.fwordweights()
         return model
 
-    def run_all_time_periods(self, save=True):
+    def _run_all_time_periods(self, save=True):
         for t in range(0, len(self.dataset)):
-            model = self.run_one_time_period(t)
+            model = self._run_one_time_period(t)
             topics = model.show_topics(num_topics=self.k, num_words=self.top_words, formatted=False)
             noise = model.load_noise_dist()
             self.topics = topics
@@ -102,6 +122,7 @@ class dTND(TND):
     def get_topics(self, t, top_words=None):
         """
         takes top_words and self.topics, returns a list of topic lists of length top_words
+
         :param t: time period
         :param top_words:
         :return: list of topic lists
@@ -120,6 +141,7 @@ class dTND(TND):
         """
         takes self.tnd_noise_distribution and tnd_noise_words_max
         returns a list of (noise word, frequency) tuples ranked by frequency
+
         :param t: time period
         :param tnd_noise_words_max:
         :return: list of (noise word, frequency) tuples

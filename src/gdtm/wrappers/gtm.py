@@ -34,16 +34,10 @@ class GTMMallet(BaseMalletWrapper):
     This is **only** python wrapper for `MALLET LDA <http://mallet.cs.umass.edu/>`,
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
-    """
-    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
-                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
-                 seed_topics_file=None, sampling_scheme=2, over_sampling_factor=1, seed_gpu_weights=None):
-        """
-
         Parameters
         ----------
         mallet_path : str
-            Path to the mallet binary, e.g. `/home/username/mallet-2.0.7/bin/mallet`.
+            Path to the mallet binary, e.g. `/home/username/mallet-gtm/bin/mallet`.
         corpus : iterable of iterable of (int, int), optional
             Collection of texts in BoW format.
         num_topics : int, optional
@@ -74,7 +68,10 @@ class GTMMallet(BaseMalletWrapper):
             A value of 10 will oversample a seed word 10:1
         seed_gpu_weights: list of lists corresponding to one weight per seed word per topic
 
-        """
+    """
+    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
+                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
+                 seed_topics_file=None, sampling_scheme=2, over_sampling_factor=1, seed_gpu_weights=None):
         super().__init__(mallet_path, corpus=corpus, num_topics=num_topics, alpha=alpha, beta=beta, id2word=id2word,
                          workers=workers, prefix=prefix, optimize_interval=optimize_interval, iterations=iterations,
                          topic_threshold=topic_threshold, random_seed=random_seed)

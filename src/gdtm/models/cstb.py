@@ -8,7 +8,7 @@ from ..helpers.common import load_topics, save_topics
 from ..helpers.exceptions import NotEnoughTopicSetsError
 
 
-def match_topics(t1, t2, word_threshold=3, topn=5):
+def _match_topics(t1, t2, word_threshold=3, topn=5):
     set_t1 = set(t1[:topn])
     set_t2 = set(t2[:topn])
     if len(set_t1 & set_t2) >= word_threshold:
@@ -16,7 +16,7 @@ def match_topics(t1, t2, word_threshold=3, topn=5):
     return False
 
 
-def filter_components(components, source_threshold=3, num_sources=3):
+def _filter_components(components, source_threshold=3, num_sources=3):
     filtered_components = []
     for comp in components:
         if len(comp) < source_threshold:
@@ -30,7 +30,7 @@ def filter_components(components, source_threshold=3, num_sources=3):
     return filtered_components
 
 
-def combine_topic(topics, words_per_topic=5):
+def _combine_topic(topics, words_per_topic=5):
     '''
         Threads lists into each other (first word from each list, then second, third...)
         Then removes duplicates
@@ -46,10 +46,10 @@ def combine_topic(topics, words_per_topic=5):
     return list(dict.fromkeys(combined_topic))
 
 
-def combine_topics(matched_topics, words_per_topic=5):
+def _combine_topics(matched_topics, words_per_topic=5):
     topics = []
     for matched_topic in matched_topics:
-        topic = combine_topic(matched_topic, words_per_topic=words_per_topic)
+        topic = _combine_topic(matched_topic, words_per_topic=words_per_topic)
         topics.append(topic)
     return topics
 
@@ -59,10 +59,14 @@ def cstb(topic_sets, source_thresholds=(3,), word_threshold=3, topn=5, words_per
     Cross-Source Topic Blending: Blends topics by finding them in other data sources.
 
     :param topic_sets: list of topic sets, one for each data source.
-    :param source_thresholds: minimum number of sources that a topic must appear in to be integrated (ell in paper)
-    :param word_threshold: minimum number of words overlapping to match a topic between sources (chi in paper)
-    :param topn: top n words per topic to consider (psi in paper)
-    :param words_per_topic: number of words per topic to put into final topic
+    :param source_thresholds: list, required:
+        minimum number of sources that a topic must appear in to be integrated (ell in paper)
+    :param word_threshold: int, required:
+        minimum number of words overlapping to match a topic between sources (chi in paper)
+    :param topn: int, optional:
+        number of words per topic to consider for blending (psi in paper)
+    :param words_per_topic: int, optional:
+        number of words per topic to put into final topic
     '''
 
     topic_components = []
@@ -78,7 +82,7 @@ def cstb(topic_sets, source_thresholds=(3,), word_threshold=3, topn=5, words_per
                 ts_j = topic_sets[j]
                 for n in range(0, len(ts_j)):
                     t2 = ts_j[n]
-                    if match_topics(t1, t2, word_threshold=word_threshold, topn=topn):
+                    if _match_topics(t1, t2, word_threshold=word_threshold, topn=topn):
                         comp_exists = False
                         for comp in topic_components:
                             if (i, m) in comp:
@@ -96,19 +100,19 @@ def cstb(topic_sets, source_thresholds=(3,), word_threshold=3, topn=5, words_per
 
     core_topic_sets = []
     for source_threshold in source_thresholds:
-        core_components = filter_components(topic_components, source_threshold, num_sources)
+        core_components = _filter_components(topic_components, source_threshold, num_sources)
         core_topics = []
         for comp in core_components:
             topics = []
             for topic in comp:
                 topics.append(topic_sets[topic[0]][topic[1]])
             core_topics.append(topics)
-        core_topics = combine_topics(core_topics, words_per_topic=words_per_topic)
+        core_topics = _combine_topics(core_topics, words_per_topic=words_per_topic)
         core_topic_sets.append(core_topics)
     return core_topic_sets
 
 
-def main():
+def _main():
     dataset_label = 'covid'
     dataset_names = ['covid_election2020', 'covid_news', 'covid_reddit']
     results_path = 'results/lmm_paper'
@@ -133,4 +137,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    _main()

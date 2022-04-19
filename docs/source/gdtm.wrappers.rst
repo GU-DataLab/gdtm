@@ -1,56 +1,14 @@
-gdtm.wrappers package
-=====================
+Wrappers
+============
 
-Submodules
-----------
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
 
-gdtm.wrappers.base\_wrapper module
-----------------------------------
-
-.. automodule:: gdtm.wrappers.base_wrapper
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-gdtm.wrappers.dlda module
--------------------------
-
-.. automodule:: gdtm.wrappers.dlda
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-gdtm.wrappers.dtnd module
--------------------------
-
-.. automodule:: gdtm.wrappers.dtnd
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-gdtm.wrappers.gtm module
-------------------------
-
-.. automodule:: gdtm.wrappers.gtm
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-gdtm.wrappers.lda module
-------------------------
-
-.. automodule:: gdtm.wrappers.lda
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-gdtm.wrappers.tnd module
-------------------------
-
-.. automodule:: gdtm.wrappers.tnd
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   gdtm/wrappers/base_wrappers
+   gdtm/wrappers/topic_noise_models
+   gdtm/wrappers/temporal_models
+   gdtm/wrappers/semisupervised_models
 
 Module contents
 ---------------

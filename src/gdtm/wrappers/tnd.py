@@ -36,22 +36,18 @@ class TNDMallet(BaseMalletWrapper):
     This is **only** python wrapper for `MALLET TND`,
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
-    """
-    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
-                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
-                 noise_words_max=100, skew=0, is_parent=False):
-        """
-
         Parameters
         ----------
         mallet_path : str
-            Path to the mallet binary, e.g. `/home/username/mallet-2.0.7/bin/mallet`.
+            Path to the mallet binary, e.g. `/home/username/mallet-tnd/bin/mallet`.
         corpus : iterable of iterable of (int, int), optional
             Collection of texts in BoW format.
         num_topics : int, optional
             Number of topics.
         alpha : int, optional
-            Alpha parameter of LDA.
+            Alpha parameter of TND.
+        beta : float, optional
+            Beta parameter of TND
         id2word : :class:`~gensim.corpora.dictionary.Dictionary`, optional
             Mapping between tokens ids and words from corpus, if not specified - will be inferred from `corpus`.
         workers : int, optional
@@ -73,7 +69,11 @@ class TNDMallet(BaseMalletWrapper):
         skew: int, optional
             Akin to the gamma parameter in the paper, increasing `skew` increases the probability of each word being
             assigned to a topic over noise
-        """
+
+    """
+    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
+                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0,
+                 noise_words_max=100, skew=0, is_parent=False):
         super().__init__(mallet_path, corpus=corpus, num_topics=num_topics, alpha=alpha, beta=beta, id2word=id2word,
                          workers=workers, prefix=prefix, optimize_interval=optimize_interval, iterations=iterations,
                          topic_threshold=topic_threshold, random_seed=random_seed)

@@ -34,13 +34,8 @@ class BaseMalletWrapper(utils.SaveLoad, basemodel.BaseTopicModel):
     This is **only** python wrapper for `MALLET-based models`_,
     you need to install original implementation first and pass the path to binary to ``mallet_path``.
 
-    """
-    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
-                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0):
-        """
-
-        Parameters
-        ----------
+    Parameters
+    ----------
         mallet_path : str
             Path to the mallet binary, e.g. `/home/username/mallet-2.0.7/bin/mallet`.
         corpus : iterable of iterable of (int, int), optional
@@ -65,7 +60,9 @@ class BaseMalletWrapper(utils.SaveLoad, basemodel.BaseTopicModel):
         random_seed: int, optional
             Random seed to ensure consistent results, if 0 - use system clock.
 
-        """
+    """
+    def __init__(self, mallet_path, corpus=None, num_topics=100, alpha=50, beta=0.01, id2word=None, workers=4,
+                 prefix=None, optimize_interval=0, iterations=1000, topic_threshold=0.0, random_seed=0):
         self.mallet_path = mallet_path
         self.id2word = id2word
         if self.id2word is None:
