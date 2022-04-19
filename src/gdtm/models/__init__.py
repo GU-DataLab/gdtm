@@ -7,3 +7,4 @@ from .nlda import NLDA
 from .enlda import eNLDA
 from .tnd import TND
 from .etnd import eTND
+from .cstb import cstb

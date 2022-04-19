@@ -43,3 +43,11 @@ class MissingEmbeddingPathError(Exception):
         if self.message is None:
             self.message = 'You must provide a path to a pre-trained embedding space.'
         super().__init__(self.message)
+
+
+class NotEnoughTopicSetsError(Exception):
+    def __init__(self, message=None):
+        self.message = message
+        if self.message is None:
+            self.message = 'You must input at least two topic sets to perform CSTI.'
+        super().__init__(self.message)
