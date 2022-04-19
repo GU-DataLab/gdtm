@@ -184,7 +184,7 @@ class NLDA:
         """
         takes top_words and self.topics, returns a list of topic lists of length top_words
 
-        :param top_words:
+        :param top_words: number of words per topic
         :return: list of topic lists
         """
         if top_words is None:
@@ -200,7 +200,7 @@ class NLDA:
         takes self.tnd_noise_distribution and tnd_noise_words_max
         returns a list of (noise word, frequency) tuples ranked by frequency
 
-        :param tnd_noise_words_max:
+        :param tnd_noise_words_max: number of words to be returned
         :return: list of (noise word, frequency) tuples
         """
         if tnd_noise_words_max is None:
