@@ -18,7 +18,7 @@ gdtm.models.nlda module
    :show-inheritance:
 
 Embedded Topic-Noise Models
-======================
+===========================
 
 gdtm.models.etnd module
 -----------------------

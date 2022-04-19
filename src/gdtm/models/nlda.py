@@ -112,6 +112,7 @@ class NLDA:
     def _prepare_data(self):
         """
         takes dataset, sets self.dictionary and self.corpus for use in Mallet models and NLDA
+
         :return: void
         """
         dictionary = corpora.Dictionary(self.dataset)
@@ -124,6 +125,7 @@ class NLDA:
         """
         takes dataset, tnd parameters, tnd mallet path, and computes tnd model on dataset
         sets self.tnd_noise_distribution to the noise distribution computed in tnd
+
         :return: void
         """
         model = TNDMallet(self.mallet_tnd_path, self.corpus, num_topics=self.tnd_k, id2word=self.dictionary,
@@ -138,6 +140,7 @@ class NLDA:
         """
         takes dataset, lda parameters, lda mallet path, and computes LDA model on dataset
         sets self.lda_tw_dist to the topic word distribution computed in LDA
+
         :return: void
         """
         model = LDAMallet(self.mallet_lda_path, self.corpus, num_topics=self.lda_k, id2word=self.dictionary,
@@ -151,6 +154,7 @@ class NLDA:
         """
         takes self.tnd_noise_distribution, self.lda_tw_dist, self.phi, self.top_words, and computes NLDA topics
         sets self.topics to the set of topics computed from noise distribution and topic word distribution
+
         :return: void
         """
         topics = []
@@ -179,6 +183,7 @@ class NLDA:
     def get_topics(self, top_words=None):
         """
         takes top_words and self.topics, returns a list of topic lists of length top_words
+
         :param top_words:
         :return: list of topic lists
         """
@@ -194,6 +199,7 @@ class NLDA:
         """
         takes self.tnd_noise_distribution and tnd_noise_words_max
         returns a list of (noise word, frequency) tuples ranked by frequency
+
         :param tnd_noise_words_max:
         :return: list of (noise word, frequency) tuples
         """
