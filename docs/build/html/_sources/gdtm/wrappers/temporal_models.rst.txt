@@ -10,10 +10,10 @@ gdtm.wrappers.dtnd module
    :show-inheritance:
 
 
-gdtm.wrappers.dnlda module
+gdtm.wrappers.dlda module
 ------------------------
 
-.. automodule:: gdtm.wrappers.dnlda
+.. automodule:: gdtm.wrappers.dlda
    :members:
    :undoc-members:
    :show-inheritance:

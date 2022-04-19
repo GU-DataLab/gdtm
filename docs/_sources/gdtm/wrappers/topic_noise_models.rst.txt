@@ -8,11 +8,3 @@ gdtm.wrappers.tnd module
    :members:
    :undoc-members:
    :show-inheritance:
-
-gdtm.wrappers.nlda module
------------------------
-
-.. automodule:: gdtm.wrappers.nlda
-   :members:
-   :undoc-members:
-   :show-inheritance:
