@@ -154,7 +154,7 @@ class dNLDA(NLDA):
                 beta = 2
                 if w in noise_dist:
                     beta += noise_dist[w]
-                beta = max(2, beta * (phi / self.k))
+                beta = max(2, beta * (phi / self.lda_k))
                 alpha = 2 + tw_dist[i, token_id]
                 roll = random.betavariate(alpha=math.sqrt(alpha), beta=math.sqrt(beta))
                 if roll >= 0.5:
@@ -235,22 +235,22 @@ class dNLDA(NLDA):
         topic_sets = self._test_all_phi_and_depths(tw_dist, noise_dist, lda_topics)
         return topic_sets, noise_dist
 
-
     def _run_nlda_all_time_periods(self, save=True):
         for t in range(0, len(self.dataset)):
             topic_sets, noise_dist = self._run_nlda_one_time_period(t)
             self.topics.append(topic_sets[0])
             if save:
                 for phi, depth, topics in topic_sets:
-                    save_topics(topics, self.save_path + 'topics_{}_{}_{}_{}.csv'.format(self.k, t, phi, depth))
-                noise_list = sorted([(x, self.tnd_noise_distribution[t][x]) for x in self.tnd_noise_distribution[t].keys()],
+                    save_topics(topics, self.save_path + 'topics_{}_{}_{}_{}.csv'.format(self.lda_k, t, phi, depth))
+                noise_list = sorted([(x, self.tnd_noise_distribution[t][x])
+                                     for x in self.tnd_noise_distribution[t].keys()],
                                     key=lambda x: x[1], reverse=True)
-                save_noise_dist(noise_list, self.save_path + 'noise_{}_{}.csv'.format(self.k, t))
-
+                save_noise_dist(noise_list, self.save_path + 'noise_{}_{}.csv'.format(self.tnd_k, t))
 
     def get_topics(self, t, top_words=None):
         """
         takes top_words and self.topics, returns a list of topic lists of length top_words
+
         :param t: time period
         :param top_words:
         :return: list of topic lists
@@ -269,6 +269,7 @@ class dNLDA(NLDA):
         """
         takes self.tnd_noise_distribution and tnd_noise_words_max
         returns a list of (noise word, frequency) tuples ranked by frequency
+
         :param t: time period
         :param tnd_noise_words_max:
         :return: list of (noise word, frequency) tuples

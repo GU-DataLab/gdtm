@@ -134,7 +134,7 @@ class deNLDA(dNLDA):
                 beta = 2
                 if w in noise_dist:
                     beta += noise_dist[w]
-                beta = max(2, beta * (phi / self.k))
+                beta = max(2, beta * (phi / self.lda_k))
                 alpha = 2 + tw_dist[i, token_id]
                 roll = random.betavariate(alpha=math.sqrt(alpha), beta=math.sqrt(beta))
                 if roll >= 0.5:
@@ -151,10 +151,10 @@ class deNLDA(dNLDA):
         if len(self.tnd_noise_distribution) > t:
             noise_dist = self.tnd_noise_distribution[t]
         else:
-            tnd_model = deTNDMallet(self.mallet_tnd_path, corpus=self.corpus, num_topics=self.k, beta=self.last_tnd_beta,
-                                    id2word=self.dictionary, iterations=self.tnd_iterations, skew=self.tnd_beta1,
-                                    noise_words_max=self.tnd_noise_words_max, workers=self.tnd_workers,
-                                    noise_dist_file=self.last_tnd_noise_dist_file,
+            tnd_model = deTNDMallet(self.mallet_tnd_path, corpus=self.corpus, num_topics=self.tnd_k,
+                                    beta=self.last_tnd_beta, id2word=self.dictionary, iterations=self.tnd_iterations,
+                                    skew=self.tnd_beta1, noise_words_max=self.tnd_noise_words_max,
+                                    workers=self.tnd_workers, noise_dist_file=self.last_tnd_noise_dist_file,
                                     tw_dist_file=self.last_tnd_tw_dist_file,
                                     alpha_array_infile=self.last_tnd_alpha_array_file, alpha=self.tnd_alpha,
                                     embedding_path=self.embedding_path, closest_x_words=self.closest_x_words)
@@ -169,16 +169,17 @@ class deNLDA(dNLDA):
             tw_dist = self.lda_tw_dist[t]
             lda_topics = self.lda_topics[t]
         else:
-            lda_model = dLDAMallet(self.mallet_lda_path, self.corpus, num_topics=self.k, id2word=self.dictionary,
+            lda_model = dLDAMallet(self.mallet_lda_path, self.corpus, num_topics=self.lda_k, id2word=self.dictionary,
                                workers=self.lda_workers, tw_dist_file=self.last_lda_tw_dist_file,
                                alpha_array_infile=self.last_lda_alpha_array_file, beta=self.last_lda_beta,
                                iterations=self.lda_iterations, random_seed=self.random_seed)
             tw_dist = lda_model.load_word_topics()
             self.lda_tw_dist.append(tw_dist)
-            topic_tuples = lda_model.show_topics(num_topics=self.lda_k, num_words=self.nlda_topic_depth, formatted=False)
+            topic_tuples = lda_model.show_topics(num_topics=self.lda_k, num_words=self.nlda_topic_depth,
+                                                 formatted=False)
             lda_topics = [[w for (w, _) in topic[1]] for topic in topic_tuples]
             if self.lda_save_path:
-                save_topics(lda_topics, self.lda_save_path + 'topics_{}_{}.csv'.format(self.k, t))
+                save_topics(lda_topics, self.lda_save_path + 'topics_{}_{}.csv'.format(self.lda_k, t))
             self.lda_topics.append(lda_topics)
             self.last_lda_beta = lda_model.load_beta()
             self.last_lda_alpha_array_file = lda_model.falphaarrayfile()

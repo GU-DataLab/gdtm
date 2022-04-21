@@ -59,7 +59,7 @@ lda_path = 'path/to/mallet-lda/bin/mallet'
 
 # We pass in the paths to the java code along with the data set and whatever parameters we want to set
 model = NLDA(dataset=dataset, mallet_tnd_path=tnd_path, mallet_lda_path=lda_path, 
-             tnd_k=30, lda_k=30, nlda_phi=10, top_words=20, save_path='path/to/results/')
+             tnd_k=30, lda_k=30, phi=10, top_words=20)
 
 topics = model.get_topics()
 noise = model.get_noise_distribution()
@@ -83,6 +83,39 @@ model = TNDMallet(tnd_path, corpus, num_topics=30, id2word=dictionary,
 
 topics = model.get_topics()
 noise = model.load_noise_dist()
+```
+
+### More Examples
+Below, you can find examples of how to use specific models in the package.
+
+#### Guided Topic-Noise Model (GTM)
+```python
+from src.gdtm.models import GTM
+
+# Set these paths to the path where you saved the Mallet implementation of each model, plus bin/mallet
+tnd_path = 'path/to/mallet-tnd/bin/mallet'
+gtm_path = 'path/to/mallet-gtm/bin/mallet'
+
+seed_topics_file = 'data/seed_topics.csv'
+
+# We pass in the paths to the java code along with the data set and whatever parameters we want to set
+model = GTM(dataset=dataset, mallet_tnd_path=tnd_path, mallet_gtm_path=gtm_path, 
+             tnd_k=15, gtm_k=15, phi=10, top_words=20, seed_topics_file=seed_topics_file)
+```
+
+#### Dynamic Noiseless Latent Dirichlet Allocation (DNLDA)
+```python
+from src.gdtm.models import dNLDA
+
+# Set these paths to the path where you saved the Mallet implementation of each model, plus bin/mallet
+tnd_path = 'path/to/mallet-dtnd/bin/mallet'
+lda_path = 'path/to/mallet-dlda/bin/mallet'
+
+# We pass in the paths to the java code along with the data set and whatever parameters we want to set
+model = dNLDA(dataset=split_dataset, mallet_tnd_path=tnd_path, mallet_lda_path=lda_path, num_time_periods=num_time_periods,
+             tnd_k=30, lda_k=30, phi=10, top_words=20, save_path='results/dnlda/', run=True)
+
+# When we provide a save path to the dynamic models, topics and noise are automatically saved for each time period.
 ```
 
 ### Acknowledgements
