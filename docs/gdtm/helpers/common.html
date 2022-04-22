@@ -79,80 +79,255 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.day">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">day</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.day" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p><em>Epoch function.</em>
+Takes a date and normalizes it to the day (removing hour, minute, second).
+Every datetime object from January 1, 2021 (e.g. January 1, 2021 03:12:48, January 1, 2021 12:45:00)
+will return January 1, 2021.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>d</strong> – Datetime object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Datetime object</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.fortnight">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">fortnight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.fortnight" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p><em>Epoch function.</em>
+Takes a date and normalizes it to the first day of its fortnight (two-week period).
+Every date from January 4-17, 2021 will return January 4, 2021.
+Note: Unsure if this is a valid date range for a fortnight, or if we are off by a week.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>d</strong> – Datetime object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Datetime object</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.get_time_periods">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">get_time_periods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epoch_function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.get_time_periods" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Computes all valid time periods in a data set, given the dates and an epoch function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – list of lists</p></li>
+<li><p><strong>epoch_function</strong> – a function that normalizes dates to a time period</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>sorted list of time periods</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.get_vocabulary">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">get_vocabulary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">docs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.get_vocabulary" title="Permalink to this definition"></a></dt>
-<dd><p>This version of get_vocabulary takes 0.08 seconds on 100,000 documents whereas the old version took forever.</p>
+<dd><p>Given a set of documents, computes the unique vocabulary.
+This version of get_vocabulary takes 0.08 seconds on 100,000 documents whereas the old version took forever.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>docs</strong> – list of lists</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of unique words</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.load_dated_dataset">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">load_dated_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\t'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc_delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.load_dated_dataset" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><dl class="simple">
+<dt>Load a data set with dates from a CSV.</dt><dd><p>The file format should be one line per document, with the date field, followed by the document. The date and
+document delimiters should be different.
+For example: 09/10/2021[tab]word1,word2,word3…wordn</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – path (including file name) of data set file</p></li>
+<li><p><strong>date_delimiter</strong> – character, optional:
+character delimiting date from docuemnt on a line</p></li>
+<li><p><strong>doc_delimiter</strong> – character, optional:
+character delimiting words in a document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of tuples (date, document [list of words])</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.load_flat_dataset">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">load_flat_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.load_flat_dataset" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><dl class="simple">
+<dt>Load a data set from a CSV.</dt><dd><p>Each document should be its own line, with each word in a document separated by the delimiter character.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – path (including file name) of data set file</p></li>
+<li><p><strong>delimiter</strong> – character, optional:
+character delimiting words in a document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of lists</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.load_noise_dist">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">load_noise_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.load_noise_dist" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Load a noise distribution from a CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – path (including file name) to save topic set to.</p></li>
+<li><p><strong>delimiter</strong> – character, optional:
+character delimiting words in a document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of tuples (word, frequency)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.load_split_dataset">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">load_split_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_time_periods</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.load_split_dataset" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Load a data set sliced into tranches for temporal modeling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – path (including file name) of data set file</p></li>
+<li><p><strong>file_name</strong> – the name of the data set</p></li>
+<li><p><strong>num_time_periods</strong> – the number of time periods that the data set has been sliced into (tranches)</p></li>
+<li><p><strong>delimiter</strong> – character, optional:
+character delimiting words in a document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of lists of lists
+(list of time periods, containing list of documents, containing list of words)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.load_topics">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">load_topics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.load_topics" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Load topic set from a CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – path (including file name) to save topic set to.</p></li>
+<li><p><strong>delimiter</strong> – character, optional:
+character delimiting words in a document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of lists</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.month">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">month</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.month" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p><em>Epoch function.</em>
+Takes a date and normalizes it to the nearest year and month.
+Every date from January 2021 will return January 1, 2021.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>d</strong> – Datetime object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Datetime object</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.none">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.none" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p><em>Epoch function.</em>
+The null date normalizer.  Normalizes every date to 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>d</strong> – Datetime object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>1</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.save_flat_dataset">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">save_flat_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.save_flat_dataset" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><dl class="simple">
+<dt>Save a data set to a CSV.</dt><dd><p>Each data set is saved to its own line in the CSV, with each word separated by the delimiter character.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – path (including file name) of data set file</p></li>
+<li><p><strong>dataset</strong> – list of lists</p></li>
+<li><p><strong>delimiter</strong> – character, optional:
+character delimiting words in a document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.save_noise_dist">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">save_noise_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">noise</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.save_noise_dist" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Save the words in a noise distribution to a CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>noise</strong> – list of tuples (word, frequency)</p></li>
+<li><p><strong>path</strong> – path (including file name) to save noise distribution to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.save_split_dataset">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">save_split_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.save_split_dataset" title="Permalink to this definition"></a></dt>
-<dd><p>Saves a data set sliced into tranches for temporal modeling.</p>
+<dd><p>Save a data set sliced into tranches for temporal modeling.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> – PATH SHOULD BE A PATH AND NOT A FILE NAME</p></li>
+<li><p><strong>path</strong> – path (including file name) of data set file</p></li>
 <li><p><strong>file_name</strong> – the name of the data set</p></li>
-<li><p><strong>dataset</strong> – </p></li>
-<li><p><strong>delimiter</strong> – </p></li>
+<li><p><strong>dataset</strong> – list of lists of lists
+(list of time periods, containing list of documents, containing list of words)</p></li>
+<li><p><strong>delimiter</strong> – character, optional:
+character delimiting words in a document</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -164,22 +339,70 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.save_topics">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">save_topics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.save_topics" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Saves a topic set to a CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topics</strong> – list of lists</p></li>
+<li><p><strong>path</strong> – path (including file name) to save topic set to.</p></li>
+<li><p><strong>delimiter</strong> – character, optional:
+character delimiting words in a document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.split_dataset_by_date">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">split_dataset_by_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epoch_function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.split_dataset_by_date" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Takes a data set and epoch function, and splits the data set into tranches based on the valid time periods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – list of lists</p></li>
+<li><p><strong>epoch_function</strong> – a function that normalizes dates to a time period</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of lists of lists (data set split into time periods)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.week">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">week</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.week" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p><em>Epoch function.</em>
+Takes a date and normalizes it to the first day of its week.
+Every date from January 4-10, 2021 will return January 4, 2021.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>d</strong> – Datetime object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Datetime object</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="gdtm.helpers.common.year">
 <span class="sig-prename descclassname"><span class="pre">gdtm.helpers.common.</span></span><span class="sig-name descname"><span class="pre">year</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gdtm.helpers.common.year" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p><em>Epoch function.</em>
+Takes a date and normalizes it to the nearest year.
+Every date from 2021 will return January 1, 2021.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>d</strong> – Datetime object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Datetime object</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 

@@ -3,6 +3,10 @@ Exceptions shared across files.
 '''
 
 class MissingModelError(Exception):
+    '''
+    Error for model classes that are initialized without the underlying Java model or a pretrained model.
+
+    '''
     def __init__(self, model, message=None):
         self.model = model
         self.message = message
@@ -12,6 +16,10 @@ class MissingModelError(Exception):
 
 
 class MissingDataSetError(Exception):
+    '''
+    Error for model classes that are initialized without a data set or a pretrained model.
+
+    '''
     def __init__(self, message=None):
         self.message = message
         if self.message is None:
@@ -21,6 +29,10 @@ class MissingDataSetError(Exception):
 
 
 class MissingSeedsError(Exception):
+    '''
+    Error for Guided Topic-Noise model class that is initialized without seed topics.
+
+    '''
     def __init__(self, message=None):
         self.message = message
         if self.message is None:
@@ -29,6 +41,10 @@ class MissingSeedsError(Exception):
 
 
 class MissingSeedWeightsError(Exception):
+    '''
+    Error for GTM wrapper class that is initialized without seed weights.
+
+    '''
     def __init__(self, message=None):
         self.message = message
         if self.message is None:
@@ -38,6 +54,10 @@ class MissingSeedWeightsError(Exception):
 
 
 class MissingEmbeddingPathError(Exception):
+    '''
+    Error for embedded model classes that are initialized without a path to embedding vectors.
+
+    '''
     def __init__(self, message=None):
         self.message = message
         if self.message is None:
@@ -46,8 +66,12 @@ class MissingEmbeddingPathError(Exception):
 
 
 class NotEnoughTopicSetsError(Exception):
+    '''
+    Error for CSTB functions that are not provided at least two topic sets for blending.
+
+    '''
     def __init__(self, message=None):
         self.message = message
         if self.message is None:
-            self.message = 'You must input at least two topic sets to perform CSTI.'
+            self.message = 'You must input at least two topic sets to perform CSTB.'
         super().__init__(self.message)
